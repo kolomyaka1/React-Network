@@ -1,0 +1,28 @@
+.header {
+    grid-area: h;
+    background-color: #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header img {
+    width: 55px;
+    height: 55px;
+    padding-left: 25px;
+}
+
+.login__block {
+    float: right;
+    margin-right: 25px;
+}
+
+.login__block span {
+    color: white;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+.login__link {
+    display: inline;
+}

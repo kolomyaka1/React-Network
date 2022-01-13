@@ -1,0 +1,39 @@
+.myPosts__wrapper {
+    padding: 15px;
+    padding-top: 0px;
+}
+
+.myPosts__title {
+    margin-bottom: 15px;
+    font-weight: normal;
+}
+
+.posts {
+    margin-top: 35px;
+}
+
+.add__button {
+    background-color: gainsboro;
+    border: 1px solid #333;
+    color: black;
+    border-radius: 10px;
+    line-height: 18px;
+    cursor: pointer;
+    padding: 5px 15px;
+    margin-left: 25px;
+    transition: all 300ms ease-in-out;
+}
+
+.add__button:hover {
+    background-color:#333;
+    color: white;
+    transition: all 300ms ease-in-out;
+}
+
+.post__edit {
+    display: flex;
+}
+
+.post__area {
+    resize: none;
+}

@@ -1,0 +1,33 @@
+.profileInfo__img {
+    width: 100%;
+    padding-bottom: 25px;
+}
+
+.profileInfo__description {
+    padding: 15px;   
+}
+
+.description__block {
+    display: flex;
+}
+
+.profile__img {
+    margin-left: 15px;   
+}
+
+.profile__contacts {
+    margin-left: 25px;
+}
+
+.profile__title {
+    margin-top: 0px;
+    margin-bottom: 15px;
+}
+
+.profile__status {
+    margin-top: 20px;
+}
+
+.contacts__block {
+    margin-top: 10px;
+}

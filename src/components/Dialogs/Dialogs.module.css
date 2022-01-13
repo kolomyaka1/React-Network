@@ -1,0 +1,46 @@
+.dialogs__wrapper {
+    background-color:gainsboro;
+    display: grid;
+    grid-template-columns: 2fr 1px 10fr;
+    
+}
+
+.dialogs__item {
+    padding: 10px;
+}
+
+.dialog {
+    padding: 5px;
+}
+
+.active {
+    color: red;
+}
+
+.dialogs__messages {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap;
+    align-content: space-around;
+    justify-content: flex-start; */
+}
+
+.dialog__img {
+    display: none;
+}
+
+.line {
+    border: 1px solid black;
+}
+
+.dialogs__add {
+    width: 30%;
+    resize: none;
+    margin-right: 25px;
+}
+
+.dialog__send__message {
+    display: flex;
+    align-items: center;
+}

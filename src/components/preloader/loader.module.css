@@ -1,0 +1,8 @@
+.loader {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.loader__wrapper {
+    display: flex;
+}

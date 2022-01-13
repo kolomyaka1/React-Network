@@ -1,0 +1,32 @@
+.friend {
+    margin-top: 35px;
+    font-size: 25px;
+    text-align: center;
+    
+}
+
+.friend__wrapper {
+    display: flex;
+    flex-basis: 33.3%;
+    
+}
+
+.friend__img {
+    margin-top: 25px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.friend__item {
+    margin: 5px;
+}
+
+.friend__name {
+    font-size: 14px;
+    color: white;
+}
+
+.friends__link {
+    color: white;
+}
