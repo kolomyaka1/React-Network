@@ -2,7 +2,7 @@ import React from 'react';
 import DialogItem from './DialogItem/DialogItem';
 import s from './../Dialogs/Dialogs.module.css';
 import Message from './Message/Message';
-import { Navigate } from 'react-router-dom'
+
 
 
 

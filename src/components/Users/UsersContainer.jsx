@@ -3,7 +3,6 @@ import { follow, unfollow, toggleIsFollowing } from '../../redux/users-reducer';
 import React from 'react';
 import Users from './Users.jsx';
 import Loader from '../preloader/loader.js';
-import {getUsers} from '../API/api';
 import {Navigate} from 'react-router-dom'
 import { getUsersThunkCreator } from '../../redux/users-reducer';
 class UsersAPIComponent extends React.Component {

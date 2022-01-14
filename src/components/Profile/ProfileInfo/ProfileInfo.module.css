@@ -9,6 +9,7 @@
 
 .description__block {
     display: flex;
+    margin-top: 25px;
 }
 
 .profile__img {

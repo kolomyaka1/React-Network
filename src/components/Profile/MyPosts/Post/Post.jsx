@@ -5,7 +5,7 @@ let Post = (props) => {
         <div>
             <div className={s.post__wrapper}>
                 <div className={s.item}>
-                    <img src="https://html5css.ru/howto/img_avatar.png" />
+                    <img src="https://html5css.ru/howto/img_avatar.png" alt='ava-img'/>
                     <span className={s.message}>{props.message}</span>
             </div>
                     <div className={s.likes}>

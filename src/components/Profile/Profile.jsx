@@ -1,10 +1,11 @@
 import MyPostsContainer from './MyPosts/MyPostsContainer';
-import ProfileInfo from './ProfileInfo/ProfileInfo';
+
+import ProfileInfoContainer from './ProfileInfo/ProfileInfoContainer';
 
 let Profile = (props) => {
     return (
         <div>
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfoContainer profile={props.profile} updateUserStatus={props.updateUserStatus} status={props.status} />
             <MyPostsContainer />
         </div>
     )
