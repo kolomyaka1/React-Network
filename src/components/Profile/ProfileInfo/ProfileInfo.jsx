@@ -22,7 +22,7 @@ let ProfileInfo = (props) => {
                             <div className={s.profile__status}>
                                 About: {props.profile.lookingForAJobDescription ? props.profile.lookingForAJobDescription : 'Не указано'}
                             </div>
-                            <ProfileStatus status={props.status}  />
+                            <ProfileStatus status={props.status}  updateUserStatus={props.updateUserStatus}/>
                         </div>
                     </div>
                 </div>

@@ -33,7 +33,6 @@ export const usersAPI = {
 
 export const profileAPI = {
     getStatus(userId) {
-        
         return instance.get(`profile/status/${userId}`)
     },
     updateStatus(status) {
