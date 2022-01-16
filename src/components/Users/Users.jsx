@@ -15,10 +15,6 @@ let Users = (props) => {
         }
     }
 
-    // if (!props.isAuth) {
-    //     return <Navigate replace to='/Login' />
-    // }
-    
     return <div>
         <div className={s.page__wrapper}>
             {pages.map(p => {
