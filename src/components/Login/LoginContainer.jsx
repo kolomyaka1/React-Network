@@ -1,35 +1,51 @@
 import React from 'react';
-import { Formik } from 'formik';
+import { Formik, useFormik } from 'formik';
 import * as yup from 'yup';
 import Login from './Login';
+import s from './Login.module.css'
 
 
-function LoginContainer() {
+const SignupForm = () => {
+    const formik = useFormik({
+        initialValues : {
+            email : '',
+            password : '',
+        },
+        onSubmit : values => {
+            alert(JSON.stringify(values, null, 2));
+        },
+    });
+    return(
+        <div className={s.wrapper__content}>
+        <div className={s.login__block}>
+            <h2 className={s.login__title}>LOGIN</h2>
+            <form onSubmit={formik.handleSubmit}>
+                <label htmlFor="email">Email</label><br />
+                <input type="email"
+                id='email'
+                name='email'
+                onChange={formik.handleChange}
+                value={formik.values.email}
+                onBlur={formik.handleBlur}
+                /><br />
+                {formik.errors.email ? <div>{formik.errors.email}</div>
+                : null}
 
+                <label htmlFor="password" className={s.login__password}>Password</label><br/>
+                <input type="password" 
+                id="password"
+                name="password"
+                onChange={formik.handleChange}
+                value={formik.values.password}
+                onBlur={formik.handleBlur}
+                />
 
-    return( 
-        <div>
-            <Formik
-                initialValue={{
-                    email: '',
-                    password: '',
-                }}
-                validateOnBlur
-                onSubmit={(values) => { console.log(values) }}
-            >
-                {({ values, errors, touched, handleChange, handleBlur, isValid, handleSubmit, dirty }) => (
-                    <div className={s.login__block}>
-                        <form>
-                            <h2 className={s.login__title}>LOGIN</h2>
-                            <div>Email</div><input type={props.email} onChange={props.handleChange} onBlur={props.handleBlur} value={props.values.email} />
-                            <div className={s.login__password}>Password</div><input type={password} />
-                            <div className={s.login__button}><button className={s.login__button1} type='submit'>Войти</button></div>
-                        </form>
-                    </div>
-                )}
-            </Formik>
+                <button type='submit' className={s.login__button}>Войти</button>    
+            </form>  
         </div>
+        </div>
+        // <Login />
     )
-}
+} 
 
-export default LoginContainer;
+export default SignupForm;

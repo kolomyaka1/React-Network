@@ -1,5 +1,10 @@
+.wrapper__content{
+
+}
+
 .login__block {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
@@ -13,7 +18,7 @@
 }
 
 .login__password {
-    margin-top: 15px;
+    /* padding-top: 15px; */
 }
 
 
