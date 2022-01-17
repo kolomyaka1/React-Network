@@ -1,7 +1,11 @@
+.wrapper__content{
+
+}
+
 .login__block {
     display: flex;
-    justify-content: center;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
@@ -14,31 +18,22 @@
 }
 
 .login__password {
-    display: flex;
-    flex-direction: column;
-    margin: 5px;
+    /* padding-top: 15px; */
 }
 
-.login__email {
-    display: flex;
-    flex-direction: column;
-    margin: 5px;
-}
 
-.login__form {
-    display: flex;
-    flex-direction: column;
+.login__password input {
+    background-color: #e6e6e6;
 }
-
 
 .login__button {
-    margin-top: 10px;
+    margin-top: 20px;
     display: flex;
     justify-content: center;
     
 }
 
-button {
+.login__button1 {
     background-color: gainsboro;
     border: 1px solid #333;
     color: black;
@@ -47,38 +42,11 @@ button {
     cursor: pointer;
     padding: 5px 15px;
     transition: all 300ms ease-in-out;
-    margin-top: 20px;
-    justify-content: center;
-    align-items: center;
 }
 
-button:hover {
+.login__button1:hover {
     background-color:#333;
     color: white;
-    transition: all 300ms ease-in-out;  
+    transition: all 300ms ease-in-out;
+    
 }
-
-input:focus,
-select:focus,
-textarea:focus {
-  outline: none;
-  border: 2px solid #333;
-}
-
-input[type="email"],
-input[type="text"],
-input[type="password"] {
-    border-radius: 10px;
-    padding: 0.65rem 0.5rem;
-    border: 1px solid #333;
-    background-color: gainsboro;
-}
-
-label {
-    font-weight: bold;
-}
-
-input[type="checkbox"]:checked {
-    border-color: #333;
-}
-
