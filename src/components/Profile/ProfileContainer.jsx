@@ -5,6 +5,7 @@ import { getProfile, getUserStatus, updateUserStatus } from './../../redux/profi
 import { useMatch } from 'react-router-dom';
 import { AuthRedirect } from '../../HOC/AuthReducer';
 
+
 class ProfileContainer extends React.Component {
 
     componentDidMount() {
@@ -15,6 +16,7 @@ class ProfileContainer extends React.Component {
     }
 
     render() {
+
         return (
             <Profile {...this.props} profile={this.props.profile} 
             updateUserStatus={this.props.updateUserStatus} getProfile={this.props.getProfile}

@@ -3,7 +3,7 @@ import ProfileInfo from './ProfileInfo';
 import { connect } from 'react-redux';
 import React from 'react';
 import { getProfile, getUserStatus, updateUserStatus } from '../../../redux/profile-reducer'
-
+import { Navigate } from 'react-router';
 
 class ProfileInfoContainer extends React.Component {
 
@@ -15,7 +15,9 @@ class ProfileInfoContainer extends React.Component {
     }
 
     render() {
-        
+        if (!this.props.isAuth) {
+            return <Navigate replace to='/Login' />
+        }
         return (
             <ProfileInfo {...this.props} profile={this.props.profile}  status={this.props.status} />
         )
