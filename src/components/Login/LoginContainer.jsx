@@ -13,7 +13,7 @@ const MyTextInput = ({ label, ...props }) => {
     const [field, meta] = useField(props);
     return (
         <>
-            <label htmlFor={props.id || props.name}>{label}</label><br/>
+            <label htmlFor={props.id || props.name}>{label}</label><br />
             <input className="text-input" {...field} {...props} />
             {meta.touched && meta.error ? (
                 <div className="error">{meta.error}</div>
@@ -22,32 +22,30 @@ const MyTextInput = ({ label, ...props }) => {
     );
 };
 
-// const MyCheckbox = ({ children, ...props }) => {
-//     const [field, meta] = useField({ ...props, type: 'checkbox' });
-//     return (
-//         <div>
-//             <label className="checkbox-input">
-//                 <input type="checkbox" {...field} {...props} />
-//                 {children}
-//             </label>
-//             {meta.touched && meta.error ? (
-//                 <div className="error">{meta.error}</div>
-//             ) : null}
-//         </div>
-//     );
-// };
+const MyCaptcha = ({ label, ...props }) => {
+    
+    const [field, meta] = useField(props);
+    return (
+        <>
+            <input type="text" {...field} {...props} /><br/>
+            {meta.touched && meta.error ? (
+                <div className='error'>{meta.error}</div>
+            ) : null}
+        </>
+    )
+}
 
 const validationSchema = Yup.object({
     email: Yup.string()
         .email('Почта указана неверно')
         .required('Обязательное поле'),
     password: Yup.string()
-        .max(15, 'Должно быть не более 15 символов')
+        .max(15, 'Не более 15 символов')
         .required('Обязательное поле'),
 })
 
 const SignupForm = (props) => {
-    
+
     if (props.isAuth) {
         return <Navigate replace to='/Profile' />
     }
@@ -59,12 +57,12 @@ const SignupForm = (props) => {
                 initialValues={{
                     email: '',
                     password: '',
-                    isRemember: '',
+                    captcha: '',
                 }}
                 onSubmit={values => {
-                    let {email, password, isRemember} = values;
-                    props.login(email, password, isRemember);
                     
+                    let { email, password, captcha } = values;
+                    props.login(email, password, captcha);
                 }}
                 validationSchema={validationSchema}
             >
@@ -74,6 +72,7 @@ const SignupForm = (props) => {
                     <Form className={s.login__form} onSubmit={(e) => {
                         e.preventDefault();
                         handleSubmit();
+
                     }}>
                         <div className={s.login__email}>
                             <MyTextInput
@@ -92,14 +91,30 @@ const SignupForm = (props) => {
                                 type='password'
                             />
                         </div>
+                        <img src={props.captcha}></img><br />
+                        <MyCaptcha
+                            name="captcha"
+                            label='captcha'
+                        />
 
-                        {/* <MyCheckbox name="isRemember">
-                            Remember me
-                        </MyCheckbox> */}
+                        <button type="submit">Отправить</button>
+                        {/* <div className={s.login__captcha}>
+                                <img src={props.captcha} alt="captcha" />
+                                <input type="text" name='captcha' placeholder='Текст с картинки'/>
+                                
+                        </div> */}
 
-                        <div className={s.login__button}>
-                            <button className={s.login__buton1} type="submit" >Submit</button>
-                        </div>
+
+                        {/* {props.captcha
+                            ? <div className={s.login__captcha}>
+                                <img src={props.captcha} alt="captcha" />
+                                <input type="text" name='captcha' placeholder='Текст с картинки'/>
+                                <button type="submit">Отправить</button>
+                            </div>
+                            : <div className={s.login__button}>
+                                <button className={s.login__buton1} type="submit" >Отправить</button>
+                            </div>
+                        } */}
                     </Form>
                 )}
             </Formik>
@@ -109,11 +124,12 @@ const SignupForm = (props) => {
 
 let mapStateToProps = (state) => {
     return {
-        isAuth : state.auth.isAuth,
+        isAuth: state.auth.isAuth,
+        captcha: state.auth.captcha,
     }
 }
 
-export default connect(mapStateToProps, {login})(SignupForm);
+export default connect(mapStateToProps, { login })(SignupForm);
 
 // const SignupForm = () => {
 //     const formik = useFormik({
@@ -142,7 +158,7 @@ export default connect(mapStateToProps, {login})(SignupForm);
 //                 : null}
 
 //                 <label htmlFor="password" className={s.login__password}>Password</label><br/>
-//                 <input type="password" 
+//                 <input type="password"
 //                 id="password"
 //                 name="password"
 //                 onChange={formik.handleChange}
@@ -150,8 +166,8 @@ export default connect(mapStateToProps, {login})(SignupForm);
 //                 onBlur={formik.handleBlur}
 //                 />
 
-//                 <button type='submit' className={s.login__button}>Войти</button>    
-//             </form>  
+//                 <button type='submit' className={s.login__button}>Войти</button>
+//             </form>
 //         </div>
 //         </div>
 //         // <Login />

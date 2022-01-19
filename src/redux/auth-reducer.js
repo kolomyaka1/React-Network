@@ -1,7 +1,7 @@
 import {authAPI, usersAPI} from '../components/API/api'
 
-
 const SET_USER_DATA = 'SET_USER_DATA';
+const SET_CAPTCHA = 'SET_CAPTCHA';
 
 let initialState = {  // Указываем какие данные нам приходят от сервера
     userId : null,
@@ -9,6 +9,7 @@ let initialState = {  // Указываем какие данные нам пр�
     login : null,
     isFetching : false, // Loader
     isAuth : false,
+    captcha : '',
 }
 
 const authReducer = (state = initialState, action) => {
@@ -19,6 +20,8 @@ const authReducer = (state = initialState, action) => {
                 ...action.data,  // В action создаем объект data, в который закидываем наши данные с сервера
                 isAuth : true,
             }
+        case SET_CAPTCHA : 
+            return { ...state, captcha : action.captcha}
         default:
             return state;
     }
@@ -26,6 +29,7 @@ const authReducer = (state = initialState, action) => {
 }
 
 export const setAuthUserData = (userId, email, login, isAuth) => ({type : SET_USER_DATA, data: {userId, email, login, isAuth}})  // Сoздаем наш AC
+export const setCaptcha = (captcha) => ({type: SET_CAPTCHA, captcha })
 
 export const getAuthUser = () => {
     return (dispatch) => {
@@ -39,14 +43,26 @@ export const getAuthUser = () => {
     }
 }
 
-export const login = (email,password) => {
+export const getCaptcha = () => {
+    return (dispatch) => {
+        authAPI.getCaptcha()
+        .then(response => {
+            dispatch(setCaptcha(response.data.url))
+        })
+    }
+}
+
+export const login = (email,password,captcha) => {
     return (dispatch) => {
         authAPI.login( email,password )
         .then(response => {
-            debugger
             if (response.data.resultCode === 0) {
                 dispatch(getAuthUser())
-            } 
+            } else if (response.data.resultCode === 1) {
+                alert('Не правильный логин или пароль.')
+            } else if (response.data.resultCode === 10) {
+                dispatch(getCaptcha())
+            }
         })
     }
 }
