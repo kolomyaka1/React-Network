@@ -36,7 +36,7 @@ let Users = (props) => {
                             <button className={s.users__button} onClick={() => {
                                 props.unfollow(u.id);
                             }}>unfollow</button> :
-                            <button className={s.users__button}  onClick={() => {                                            
+                            <button className={s.users__button} onClick={() => {                                            
                                 props.follow(u.id);
                             }}>follow</button>}
 

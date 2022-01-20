@@ -78,7 +78,7 @@ const SignupForm = (props) => {
                                 label="Email Address"
                                 name="email"
                                 type="email"
-                                placeholder="user@react-network.com"
+                                placeholder="free@samuraijs.com"
                             />
                         </div>
 

@@ -14,7 +14,7 @@ let initialState = {
             { id: 3, message: 'I wanna see u', likesCounter: 9 },
             { id: 4, message: 'Ye, we can do it tomorrow!!', likesCounter: 5 },
         ],
-    newPostText: 'Write ur text here!',
+    newPostText: '',
     profile: null,
     status: 'Hello Everyone!',
 }

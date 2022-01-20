@@ -53,8 +53,9 @@ let Dialogs = (props) => {
                     className={s.dialogs__add} 
                     ref={ newDialogElement }
                     value={props.newMessageText}
+                    placeholder='Сообщение'
                     />
-                    <button onClick={ addMessage }>Send</button>
+                    <button onClick={ addMessage } className={s.dialogs__button}>Send</button>
                 </div>
 
 

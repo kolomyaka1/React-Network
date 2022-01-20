@@ -27,7 +27,7 @@ let MyPosts = (props) => { // С помощью функции maps отрисо
             <h3 className={s.myPosts__title}>My posts</h3>
             <div>
                 <div className={s.post__edit}>
-                    <textarea onChange={onPostChange}  // При изменении в textarea вызываем нашу функцию
+                    <textarea onChange={onPostChange} placeholder='Сделай новый пост!' // При изменении в textarea вызываем нашу функцию
                         className={s.post__area} ref={newPostElement}
                         value={props.newPostText} // Значение берем не с UI, а из state
                     />
