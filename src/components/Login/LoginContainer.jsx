@@ -3,7 +3,7 @@ import { Formik, Form, useField, userFormik } from 'formik';
 import * as Yup from 'yup';
 import s from './Login.module.css';
 import './LoginStyles.css';
-import { login } from '../../redux/auth-reducer';
+import { login, getCaptcha } from '../../redux/auth-reducer';
 import { connect } from 'react-redux';
 import { Navigate } from 'react-router';
 
@@ -13,8 +13,8 @@ const MyTextInput = ({ label, ...props }) => {
     const [field, meta] = useField(props);
     return (
         <>
-            <label htmlFor={props.id || props.name}>{label}</label><br/>
-            <input className="text-input" {...field} {...props} />
+            <label htmlFor={props.id || props.name}>{label}</label><br />
+            <input {...field} {...props} />
             {meta.touched && meta.error ? (
                 <div className="error">{meta.error}</div>
             ) : null}
@@ -22,20 +22,18 @@ const MyTextInput = ({ label, ...props }) => {
     );
 };
 
-// const MyCheckbox = ({ children, ...props }) => {
-//     const [field, meta] = useField({ ...props, type: 'checkbox' });
-//     return (
-//         <div>
-//             <label className="checkbox-input">
-//                 <input type="checkbox" {...field} {...props} />
-//                 {children}
-//             </label>
-//             {meta.touched && meta.error ? (
-//                 <div className="error">{meta.error}</div>
-//             ) : null}
-//         </div>
-//     );
-// };
+const CaptchaInput = ({ label, ...props }) => {
+    const [field, meta] = useField(props);
+    return (
+        <>
+        <input {...field} {...props} className={s.login__captcha__input}/>
+        {meta.touched && meta.error ? (
+            <div className='error'>{meta.error}</div>
+        ) : null}
+        </>
+    )
+}
+
 
 const validationSchema = Yup.object({
     email: Yup.string()
@@ -59,12 +57,11 @@ const SignupForm = (props) => {
                 initialValues={{
                     email: '',
                     password: '',
-                    isRemember: '',
+                    captcha: '',
                 }}
                 onSubmit={values => {
-                    let {email, password, isRemember} = values;
-                    props.login(email, password, isRemember);
-                    
+                    let { email, password, captcha } = values;
+                    props.login(email, password, captcha);
                 }}
                 validationSchema={validationSchema}
             >
@@ -93,27 +90,32 @@ const SignupForm = (props) => {
                             />
                         </div>
 
-                        {/* <MyCheckbox name="isRemember">
-                            Remember me
-                        </MyCheckbox> */}
+                        {props.captcha 
+                        ? <div className={s.login__captcha__block}> 
+                            <img src={props.captcha} alt="captcha" className={s.login__captcha} />
+                            <CaptchaInput label='captcha' name='captcha' type='text'/>
+                          </div>
+                        : null}
 
                         <div className={s.login__button}>
-                            <button className={s.login__buton1} type="submit" >Submit</button>
+                            <button type="submit" >Войти</button>
                         </div>
                     </Form>
                 )}
             </Formik>
+
         </div>
     );
 };
 
 let mapStateToProps = (state) => {
     return {
-        isAuth : state.auth.isAuth,
+        isAuth: state.auth.isAuth,
+        captcha: state.auth.captcha
     }
 }
 
-export default connect(mapStateToProps, {login})(SignupForm);
+export default connect(mapStateToProps, { login, getCaptcha })(SignupForm);
 
 // const SignupForm = () => {
 //     const formik = useFormik({
@@ -142,7 +144,7 @@ export default connect(mapStateToProps, {login})(SignupForm);
 //                 : null}
 
 //                 <label htmlFor="password" className={s.login__password}>Password</label><br/>
-//                 <input type="password" 
+//                 <input type="password"
 //                 id="password"
 //                 name="password"
 //                 onChange={formik.handleChange}
@@ -150,8 +152,8 @@ export default connect(mapStateToProps, {login})(SignupForm);
 //                 onBlur={formik.handleBlur}
 //                 />
 
-//                 <button type='submit' className={s.login__button}>Войти</button>    
-//             </form>  
+//                 <button type='submit' className={s.login__button}>Войти</button>
+//             </form>
 //         </div>
 //         </div>
 //         // <Login />
