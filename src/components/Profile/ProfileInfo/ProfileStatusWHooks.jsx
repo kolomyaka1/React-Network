@@ -12,7 +12,7 @@ const ProfileStatusWHooks = (props) => {
     let [status, setStatus] = useState(props.status);  // При необходимости использовании нескольких значений, можно использовать хук несколько раз
 
     useEffect( () => {
-        debugger
+        
         setStatus(props.status);
     }, [props.status] );
 
@@ -21,7 +21,7 @@ const ProfileStatusWHooks = (props) => {
     }
 
     const deactivateEditMode = () => {
-        debugger
+        
         props.updateUserStatus(status);
         setEditMode(false);
     }

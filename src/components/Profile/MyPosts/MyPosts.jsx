@@ -6,6 +6,7 @@ import Post from './Post/Post';
 
 
 let MyPosts = (props) => { // С помощью функции maps отрисовываем каждый элемент из props.state в созданную нами компоненту 
+    console.log('render')
     let postsElements = props.posts.map(el =>
         (<Post message={el.message} likesCounter={el.likesCounter} />)
     )
