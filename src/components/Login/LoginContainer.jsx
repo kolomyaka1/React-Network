@@ -1,5 +1,5 @@
 import React from 'react';
-import { Formik, Form, useField, userFormik } from 'formik';
+import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
 import s from './Login.module.css';
 import './LoginStyles.css';

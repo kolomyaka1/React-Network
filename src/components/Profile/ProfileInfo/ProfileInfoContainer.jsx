@@ -6,7 +6,7 @@ import { getProfile, getUserStatus, updateUserStatus } from '../../../redux/prof
 import { Navigate } from 'react-router';
 
 class ProfileInfoContainer extends React.Component {
-
+    
     componentDidMount() {
         let userId = this.props.match ? this.props.match.params.userId : '21430';
         this.props.getProfile(userId);
@@ -31,7 +31,6 @@ let mapStateToProps = (state) => ({
     profile : state.profilePage.profile,
     status : state.profilePage.status,
     isAuth : state.auth.isAuth,
-    
 })
 
 
