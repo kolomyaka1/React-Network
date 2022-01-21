@@ -6,7 +6,7 @@ let Profile = (props) => {
     
     return (
         <div>
-            <ProfileInfoContainer />
+            <ProfileInfoContainer status={props.status} />
             <MyPostsContainer />
         </div>
     )

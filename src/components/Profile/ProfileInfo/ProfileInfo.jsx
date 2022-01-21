@@ -4,7 +4,7 @@ import Loader from '../../preloader/loader';
 import ProfileStatusWHooks from './ProfileStatusWHooks';
 
 let ProfileInfo = (props) => {
-    
+    debugger
     if (!props.profile) {
         return <Loader />
     } else {
