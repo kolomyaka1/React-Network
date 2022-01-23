@@ -1,4 +1,3 @@
-import { createSelector } from 'reselect'
 
 //  Селектор - функция, которая принимает state и возвращает нам нужные значения из state.
 // Проблема состоит в том, что при каждом изменнении state наш mapStateToProps вызывается каждый раз, тем самым становиться сложнее дебажить и происходит множ. калькуляция.
@@ -16,10 +15,6 @@ export const getUsers = (state) => {
 export const getUsersSelector = (state) => {    
     return getUsers(state).filter(u => true);
 }
-
-export const getUsersSuperSelector = createSelector(getUsers, (users) =>  {
-    return users.filter(u => true);
-})
 
 export const getPageSize = (state) => {    
     return state.usersPage.pageSize;

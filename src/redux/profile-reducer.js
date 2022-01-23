@@ -4,7 +4,7 @@ const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
-
+const DELETE_POST = 'DELETE_POST';
 
 let initialState = {
     postsData:
@@ -35,7 +35,7 @@ const profileReducer = (state = initialState, action) => {
         }
         case UPDATE_NEW_POST_TEXT: {
             let stateCopy = { ...state };
-            stateCopy.newPostText = action.newText;
+            stateCopy.newPostText = action.text;
             return stateCopy;
         }
         case SET_USER_PROFILE: {
@@ -43,6 +43,10 @@ const profileReducer = (state = initialState, action) => {
         }
         case SET_USER_STATUS: {
             return { ...state, status: action.status }
+        }
+        case DELETE_POST : {
+            debugger
+            return { ...state, post : state.postsData.filter( p => p.closest('li').remove() )}
         }
         default:
             return state;
@@ -52,9 +56,10 @@ const profileReducer = (state = initialState, action) => {
 
 export const addPostActionCreator = () => ({ type: ADD_POST })
 export const updateNewPostTextActionCreator = (text) => (
-    { type: UPDATE_NEW_POST_TEXT, newText: text })
+    { type: UPDATE_NEW_POST_TEXT, text })
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
 export const setUserStatus = (status) => ({ type: SET_USER_STATUS, status })
+export const deletePost = (id) => ({ type: DELETE_POST, id})
 
 
 export const getProfile = (id) => {

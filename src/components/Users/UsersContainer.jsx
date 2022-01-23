@@ -5,7 +5,7 @@ import Users from './Users.jsx';
 import Loader from '../preloader/loader.js';
 import {Navigate} from 'react-router-dom'
 import { getUsersThunkCreator } from '../../redux/users-reducer';
-import { getCurrentPage, getIsAuth, getIsFetching, getIsFollowing, getPageSize, getTotalusersCount, getUsers, getUsersSuperSelector,  } from '../../redux/user-selectors';
+import { getCurrentPage, getIsAuth, getIsFetching, getIsFollowing, getPageSize, getTotalusersCount, getUsers,  } from '../../redux/user-selectors';
 
 class UsersAPIComponent extends React.Component {
 
@@ -44,7 +44,7 @@ class UsersAPIComponent extends React.Component {
 
 let mapStateToProps = (state) => {
     return {
-        users: getUsersSuperSelector(state),
+        users: getUsers(state),
         pageSize: getPageSize(state),
         totalUsersCount: getTotalusersCount(state),
         currentPage: getCurrentPage(state),

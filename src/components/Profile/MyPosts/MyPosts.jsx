@@ -6,9 +6,15 @@ import Post from './Post/Post';
 
 
 let MyPosts = (props) => { // С помощью функции maps отрисовываем каждый элемент из props.state в созданную нами компоненту 
+    
     console.log('render')
-    let postsElements = props.posts.map(el =>
-        (<Post message={el.message} likesCounter={el.likesCounter} />)
+    let postsElements = props.posts.map((el) => <Post login={props.login}
+        message={el.message}
+        likesCounter={el.likesCounter}
+        posts={props.posts}
+        deletePost={props.deletePost}
+        key={el.message}
+    />
     )
 
     let newPostElement = React.createRef();  // Привязываем ссылку на элемент на сайте для манипуляции над ним
@@ -22,7 +28,12 @@ let MyPosts = (props) => { // С помощью функции maps отрисо
         props.updateNewPostText(text)
     }
 
+    let deletePost = (id) => {
 
+        props.deletePost(id);
+
+        // 
+    }
     return (
         <div className={s.myPosts__wrapper}>
             <h3 className={s.myPosts__title}>My posts</h3>
