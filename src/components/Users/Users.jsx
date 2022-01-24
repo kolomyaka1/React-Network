@@ -1,25 +1,28 @@
 import React from 'react';
 import s from './users.module.css';
 import {NavLink} from 'react-router-dom';
-
+import {useState} from 'react';
+import Pagination from '../Pagination/Pagination.jsx';
 
 
 let Users = (props) => {
     
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        if (pages.length < 10) {
-            pages.push(i);
-        }
-    }
+    // let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    
+    // let pages = [];
+    // for (let i = 1; i <= pagesCount; i++) {
+    //     if (pages.length < 10) {
+    //         pages.push(i);
+    //     }
+    // }   
 
     return <div>
         <div className={s.page__wrapper}>
-            {pages.map(p => {
+            
+            {/* {pages.map(p => {
                 return <span className={props.currentPage === p && s.selectedPage} onClick={(e) => { props.onPageChanged(p) }}>{p}</span>
-            })}
+            })} */}
         </div>
         {
             props.users.map(u => <div key={u.id} className={s.users__wrapper}>

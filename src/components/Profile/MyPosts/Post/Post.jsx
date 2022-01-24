@@ -1,7 +1,10 @@
 import s from './Post.module.css';
+import cancel from '../../../../img/cancel.png';
+import like from '../../../../img/emptyLike.png'
+
 
 let Post = (props) => {
-    debugger
+    
     return (
         <div>
             <div className={s.post__wrapper}>
@@ -14,13 +17,13 @@ let Post = (props) => {
                 </div>
                 <div className={s.likes}>
                     <span>{props.likesCounter}</span>
-                    <img src="https://cdn-icons.flaticon.com/png/512/2589/premium/2589054.png?token=exp=1642896459~hmac=aa0d5a4cd2ffb636b4fbab663310644a"
+                    <img src={like}
                         alt="Likes"
                         className={s.post__likes__img}
                     />
                 </div>
                 <div>
-                    <img src="https://cdn-icons.flaticon.com/png/512/2550/premium/2550327.png?token=exp=1642896409~hmac=8a17699ac19b56f8b94a33a2441bd73a"
+                    <img src={cancel}
                         alt="CloseButton"
                         className={s.close__buton}
                         onClick={props.deletePost}

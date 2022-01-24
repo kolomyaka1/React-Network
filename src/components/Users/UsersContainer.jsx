@@ -6,6 +6,8 @@ import Loader from '../preloader/loader.js';
 import {Navigate} from 'react-router-dom'
 import { getUsersThunkCreator } from '../../redux/users-reducer';
 import { getCurrentPage, getIsAuth, getIsFetching, getIsFollowing, getPageSize, getTotalusersCount, getUsers,  } from '../../redux/user-selectors';
+import Pagination from '../Pagination/Pagination';
+import s from './users.module.css'
 
 class UsersAPIComponent extends React.Component {
 
@@ -22,8 +24,14 @@ class UsersAPIComponent extends React.Component {
         if (!this.props.isAuth) {
             return <Navigate replace to='/Login' />
         }
-        return <>
-        
+        return <div>
+            <div className={s.page__wrapper}>
+            <Pagination totalUsersCount={this.props.totalUsersCount}
+            pageSize={this.props.pageSize}
+            currentPage={this.props.currentPage}
+            onPageChanged={this.onPageChanged}
+            />
+            </div>
             {this.props.isFetching ? <Loader /> :
                 <Users totalUsersCount={this.props.totalUsersCount}
                     pageSize={this.props.pageSize}
@@ -37,7 +45,7 @@ class UsersAPIComponent extends React.Component {
                     isAuth={this.props.isAuth}
                 />}
 
-        </>
+        </div>
     }
 
 }
