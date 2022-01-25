@@ -1,10 +1,24 @@
 import s from './ProfileInfo.module.css';
 import Loader from '../../preloader/loader';
-
 import ProfileStatusWHooks from './ProfileStatusWHooks';
 
 let ProfileInfo = (props) => {
-    
+
+    let isOwner = false;
+
+    if (props.profile) {
+        if (props.profile.userId === 21430) {
+            isOwner = true;
+        }
+    }
+
+    const mainPhotoChange = (e) => {
+
+        if (e.target.files.length) {
+            props.savePhoto(e.target.files[0]);
+        }
+    }
+
     if (!props.profile) {
         return <Loader />
     } else {
@@ -14,24 +28,42 @@ let ProfileInfo = (props) => {
                     <img src={props.profile.photos.large ? props.profile.photos.large : 'https://html5css.ru/howto/img_avatar.png'} className={s.profile__img} alt='ava-logo' />
                     <div className={s.profile__contacts}>
                         <h4 className={s.profile__title}>Contacts : </h4>
-                        <div>Name: {props.profile.fullName}</div>
+
                         <div className={s.contacts__block}>
-                            <div>Facebook: {props.profile.contacts.facebook ? props.profile.contacts.facebook : 'Не указано'}</div>
-                            <div>VK: {props.profile.contacts.vk ? props.profile.contacts.vk : "Не указано"}</div>
-                            <div>Twitter: {props.profile.contacts.twitter ? props.profile.contacts.twitter : "Не указано"}</div>
-                            <div>Instagram: {props.profile.contacts.instagram ? props.profile.contacts.instagram : 'Не указано'}</div>
-                            <div className={s.profile__status}>
-                                About: {props.profile.lookingForAJobDescription ? props.profile.lookingForAJobDescription : 'Не указано'}
-                            </div>
-                            <ProfileStatusWHooks status={props.status}  updateUserStatus={props.updateUserStatus}/>
+
+                            <ProfileData profile={props.profile} isOwner={isOwner} />
+
+                            <ProfileStatusWHooks status={props.status} updateUserStatus={props.updateUserStatus} />
+
+                            {props.profile.userId === 21430 &&
+                                <div className={s.profile__addFile}>
+                                    <input type="file" className={s.profile__photos_change} onChange={mainPhotoChange} />
+                                </div>
+                            }
                         </div>
                     </div>
                 </div>
             </div>
         )
     }
-
-
 }
+
+const ProfileData = ({ profile }) => {
+
+    return (
+        <div>
+            <div>Name: {profile.fullName}</div>
+            <div>Facebook: {profile.contacts.facebook ? profile.contacts.facebook : 'Не указано'}</div>
+            <div>VK: {profile.contacts.vk ? profile.contacts.vk : "Не указано"}</div>
+            <div>Twitter: {profile.contacts.twitter ? profile.contacts.twitter : "Не указано"}</div>
+            <div>Instagram: {profile.contacts.instagram ? profile.contacts.instagram : 'Не указано'}</div>
+            <div className={s.profile__status}>
+                About: {profile.lookingForAJobDescription ? profile.lookingForAJobDescription : 'Не указано'}
+            </div>
+        </div>
+    )
+}
+
+
 
 export default ProfileInfo;

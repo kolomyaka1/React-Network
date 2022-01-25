@@ -48,7 +48,8 @@ let Dialogs = (props) => {
                 
                 
                 <div className={s.dialog__send__message}>
-                    <textarea 
+                    <input
+                    type='text' 
                     onChange={onMessageChange}
                     className={s.dialogs__add} 
                     ref={ newDialogElement }

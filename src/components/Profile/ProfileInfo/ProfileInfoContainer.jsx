@@ -2,7 +2,7 @@ import { AuthRedirect } from '../../../HOC/AuthReducer';
 import ProfileInfo from './ProfileInfo';
 import { connect } from 'react-redux';
 import React from 'react';
-import { getProfile, getUserStatus, updateUserStatus } from '../../../redux/profile-reducer'
+import { getProfile, getUserStatus, updateUserStatus, savePhoto } from '../../../redux/profile-reducer'
 import { Navigate } from 'react-router';
 
 class ProfileInfoContainer extends React.Component {
@@ -19,7 +19,8 @@ class ProfileInfoContainer extends React.Component {
             return <Navigate replace to='/Login' />
         }
         return (
-            <ProfileInfo {...this.props} profile={this.props.profile}  status={this.props.status} />
+            <ProfileInfo {...this.props} profile={this.props.profile}  
+            status={this.props.status} savePhoto={this.props.savePhoto} />
         )
     }
 }
@@ -36,4 +37,4 @@ let mapStateToProps = (state) => ({
 
 // let WithUrlDataContainerComponent = withRouter(ProfileContainer);    
 
-export default connect(mapStateToProps, { getProfile, getUserStatus, updateUserStatus })(AuthRedirectComponent);
+export default connect(mapStateToProps, { getProfile, getUserStatus, updateUserStatus, savePhoto })(AuthRedirectComponent);

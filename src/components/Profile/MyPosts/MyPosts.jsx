@@ -14,6 +14,7 @@ let MyPosts = (props) => { // С помощью функции maps отрисо
         posts={props.posts}
         deletePost={props.deletePost}
         key={el.message}
+        profile={props.profile}
     />
     )
 
@@ -28,18 +29,20 @@ let MyPosts = (props) => { // С помощью функции maps отрисо
         props.updateNewPostText(text)
     }
 
-    let deletePost = (id) => {
+    // let deletePost = (id) => {
 
-        props.deletePost(id);
+    //     props.deletePost(id);
 
-        // 
-    }
+    //     // 
+    // }
+
+
     return (
         <div className={s.myPosts__wrapper}>
             <h3 className={s.myPosts__title}>My posts</h3>
             <div>
                 <div className={s.post__edit}>
-                    <textarea onChange={onPostChange} placeholder='Сделай новый пост!' // При изменении в textarea вызываем нашу функцию
+                    <input onChange={onPostChange} type="text" placeholder='Сделай новый пост!' // При изменении в textarea вызываем нашу функцию
                         className={s.post__area} ref={newPostElement}
                         value={props.newPostText} // Значение берем не с UI, а из state
                     />

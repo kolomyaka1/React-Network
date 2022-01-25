@@ -22,6 +22,7 @@
     padding: 5px 15px;
     margin-left: 25px;
     transition: all 300ms ease-in-out;
+    font-family: Roboto;
 }
 
 .add__button:hover {
@@ -35,6 +36,17 @@
 }
 
 .post__area {
-    resize: none;
+    width: 300px;
+    font-size: 14px;
+    padding: 7px 0 7px 10px;
+    background: #F6F6F6;
+    border-radius: 8px;
+    border: none;
+    outline:none;
 }
 
+
+
+input[type="text"] {
+    font-family: roboto;
+}

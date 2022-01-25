@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import s from './ProfileInfo.module.css'
 
 
 const ProfileStatusWHooks = (props) => {
@@ -31,7 +31,7 @@ const ProfileStatusWHooks = (props) => {
     }
 
     return (
-        <div>
+        <div className={s.status__block}>
             {!editMode && 
                 <div>
                     <span onDoubleClick={activateEditMode}>Status: {props.status ? props.status : 'Не указано'}</span>

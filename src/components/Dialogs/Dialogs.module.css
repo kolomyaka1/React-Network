@@ -21,6 +21,7 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
+    margin-left: 15px;
     /* flex-wrap: wrap;
     align-content: space-around;
     justify-content: flex-start; */
@@ -35,9 +36,15 @@
 }
 
 .dialogs__add {
-    width: 30%;
-    resize: none;
-    margin-right: 25px;
+    width: 300px;
+    font-size: 14px;
+    padding: 7px 0 7px 10px;
+    background: #F6F6F6;
+    border-radius: 8px;
+    border: none;
+    outline:none;
+    margin-right: 15px;
+    
 }
 
 .dialog__send__message {

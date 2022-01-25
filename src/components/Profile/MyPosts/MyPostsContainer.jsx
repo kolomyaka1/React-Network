@@ -9,6 +9,7 @@ let mapStateToProps = (state) => {
         posts : state.profilePage.postsData,
         newPostText : state.profilePage.newPostText,
         login : state.auth.login,
+        profile : state.profilePage.profile
     }
 }
 
