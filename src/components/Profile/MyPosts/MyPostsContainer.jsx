@@ -1,5 +1,5 @@
 import MyPosts from "./MyPosts";
-import {addPostActionCreator, deletePost, updateNewPostTextActionCreator} from '../../../redux/profile-reducer'
+import {addPostActionCreator, deletePost, updateNewPostTextActionCreator, likePost,dislikePost} from '../../../redux/profile-reducer'
 import { connect } from "react-redux";
 
 
@@ -9,7 +9,7 @@ let mapStateToProps = (state) => {
         posts : state.profilePage.postsData,
         newPostText : state.profilePage.newPostText,
         login : state.auth.login,
-        profile : state.profilePage.profile
+        profile : state.profilePage.profile,
     }
 }
 
@@ -23,6 +23,12 @@ let mapDispatchToProps = (dispatch) => {
         },
         deletePost : (id) => {
             dispatch(deletePost(id))
+        },
+        likePost : (id) => {
+            dispatch(likePost(id))
+        },
+        dislikePost : (id) => {
+            dispatch(dislikePost(id))
         }
     }
 }

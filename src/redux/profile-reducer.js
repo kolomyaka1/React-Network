@@ -9,33 +9,41 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_USER_STATUS = 'SET_USER_STATUS';
 const DELETE_POST = 'DELETE_POST';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS'
+const LIKE_POST = 'LIKE_POST'
+const DISLIKE_POST = 'DISLIKE_POST'
+
 
 let initialState = {
     postsData: [{
             id: 1,
-            message: 'Hi! How are u?!',
-            likesCounter: 15
+            message: 'Hello, glad to see u on my page...',
+            likesCounter: 15,
+            isLiked : false,
         },
         {
             id: 2,
-            message: 'It`s my first post',
-            likesCounter: 7
+            message: 'Try to add new post!!',
+            likesCounter: 7,
+            isLiked : false,
         },
         {
             id: 3,
-            message: 'I wanna see u',
-            likesCounter: 9
+            message: 'Try to chek all users on users page',
+            likesCounter: 9,
+            isLiked : false,
         },
         {
             id: 4,
-            message: 'Ye, we can do it tomorrow!!',
-            likesCounter: 5
+            message: 'U can like post!',
+            likesCounter: 5,
+            isLiked : false,
         },
     ],
     newPostText: '',
     profile: null,
     status: '',
     postId : 5,
+
 }
 
 const profileReducer = (state = initialState, action) => {
@@ -44,7 +52,7 @@ const profileReducer = (state = initialState, action) => {
             let newPost = {
                 id: state.postId++,
                 message: state.newPostText, // Берем данные сообщения из state.
-                likesCounter: Math.floor(Math.random() * 10 + 5)
+                likesCounter: Math.floor(Math.random() * 20)
             };
             let stateCopy = {
                 ...state
@@ -80,8 +88,37 @@ const profileReducer = (state = initialState, action) => {
             }
         }
         case SAVE_PHOTO_SUCCESS : {
-            
             return { ...state, profile : {...state.profile, photos : action.photos}}
+        }
+        case LIKE_POST : {
+            return { 
+                ...state,
+                postsData : state.postsData.map(p => {
+                    if (p.id === action.id) {
+                        p.likesCounter++;
+                        return {
+                            ...p,
+                            isLiked : true
+                        }
+                    }
+                    return p
+                })
+            }
+        }
+        case DISLIKE_POST : {
+            return {
+                ...state,
+                postsData : state.postsData.map(p => {
+                    if (p.id === action.id) {
+                        p.likesCounter--;
+                        return {
+                            ...p,
+                            isLiked : false
+                        }
+                    }
+                    return p
+                })
+            }
         }
         default:
             return state;
@@ -114,6 +151,15 @@ export const savePhotoSuccess = (photos) => ({
     photos
 })
 
+export const likePost = (id) => ({
+    type: LIKE_POST,
+    id
+})
+
+export const dislikePost = (id) => ({
+    type: DISLIKE_POST,
+    id
+})
 
 export const getProfile = (id) => {
     return (dispatch) => {

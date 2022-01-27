@@ -7,6 +7,7 @@ import Post from './Post/Post';
 
 
 let MyPosts = (props) => { // С помощью функции maps отрисовываем каждый элемент из props.state в созданную нами компоненту 
+    
     if (!props.profile) {
         return <Loader />
     }
@@ -18,6 +19,9 @@ let MyPosts = (props) => { // С помощью функции maps отрисо
         key={el.id}
         profile={props.profile}
         id={el.id}
+        isLiked={el.isLiked}
+        likePost={props.likePost}
+        dislikePost={props.dislikePost}
     />
     )
 
