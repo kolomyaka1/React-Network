@@ -35,13 +35,14 @@ let initialState = {
     newPostText: '',
     profile: null,
     status: '',
+    postId : 5,
 }
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST: {
             let newPost = {
-                id: 5,
+                id: state.postId++,
                 message: state.newPostText, // Берем данные сообщения из state.
                 likesCounter: Math.floor(Math.random() * 10 + 5)
             };
@@ -75,7 +76,7 @@ const profileReducer = (state = initialState, action) => {
         case DELETE_POST: {
             return {
                 ...state,
-                post: state.postsData.filter(p => p.closest('li').remove())
+                postsData: state.postsData.filter(p => p.id !== action.id)
             }
         }
         case SAVE_PHOTO_SUCCESS : {

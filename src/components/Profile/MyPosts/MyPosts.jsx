@@ -1,4 +1,5 @@
 import React from 'react';
+import Loader from '../../preloader/loader';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
@@ -6,15 +7,17 @@ import Post from './Post/Post';
 
 
 let MyPosts = (props) => { // С помощью функции maps отрисовываем каждый элемент из props.state в созданную нами компоненту 
-    
-    console.log('render')
+    if (!props.profile) {
+        return <Loader />
+    }
     let postsElements = props.posts.map((el) => <Post login={props.login}
         message={el.message}
         likesCounter={el.likesCounter}
         posts={props.posts}
         deletePost={props.deletePost}
-        key={el.message}
+        key={el.id}
         profile={props.profile}
+        id={el.id}
     />
     )
 
@@ -28,14 +31,6 @@ let MyPosts = (props) => { // С помощью функции maps отрисо
         let text = newPostElement.current.value;  // Сохраняем значение textarea в переменную
         props.updateNewPostText(text)
     }
-
-    // let deletePost = (id) => {
-
-    //     props.deletePost(id);
-
-    //     // 
-    // }
-
 
     return (
         <div className={s.myPosts__wrapper}>

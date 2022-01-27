@@ -3,7 +3,7 @@ import Loader from '../../preloader/loader';
 import ProfileStatusWHooks from './ProfileStatusWHooks';
 
 let ProfileInfo = (props) => {
-
+    
     let isOwner = false;
 
     if (props.profile) {
@@ -49,13 +49,12 @@ let ProfileInfo = (props) => {
 }
 
 const ProfileData = ({ profile }) => {
-
+    
     return (
         <div>
             <div>Name: {profile.fullName}</div>
-            <div>Facebook: {profile.contacts.facebook ? profile.contacts.facebook : 'Не указано'}</div>
             <div>VK: {profile.contacts.vk ? profile.contacts.vk : "Не указано"}</div>
-            <div>Twitter: {profile.contacts.twitter ? profile.contacts.twitter : "Не указано"}</div>
+            <div>GitHub: {profile.contacts.github ? profile.contacts.github : "Не указано"}</div>
             <div>Instagram: {profile.contacts.instagram ? profile.contacts.instagram : 'Не указано'}</div>
             <div className={s.profile__status}>
                 About: {profile.lookingForAJobDescription ? profile.lookingForAJobDescription : 'Не указано'}

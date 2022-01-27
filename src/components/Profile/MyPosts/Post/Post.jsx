@@ -1,13 +1,12 @@
 import s from './Post.module.css';
 import cancel from '../../../../img/cancel.png';
 import like from '../../../../img/emptyLike.png'
-import Loader from '../../../preloader/loader';
 
 
 let Post = (props) => {
     
-    if (!props.profile) {
-        return <Loader />
+    const deletePost = (id) => {
+        props.deletePost(id)
     }
 
     return (
@@ -31,8 +30,8 @@ let Post = (props) => {
                     <img src={cancel}
                         alt="CloseButton"
                         className={s.close__buton}
-                        onClick={props.deletePost}
-                        key={props.key}
+                        onClick={() => deletePost(props.id)}
+                        id={props.id}
                     />
                 </div>
             </div>
@@ -40,5 +39,5 @@ let Post = (props) => {
     )
 }
 
-// props.deletePost
+
 export default Post;

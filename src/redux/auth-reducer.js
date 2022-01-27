@@ -10,6 +10,7 @@ let initialState = {  // Указываем какие данные нам пр�
     isFetching: false, // Loader
     isAuth: false,
     captcha: '',
+ 
 }
 
 const authReducer = (state = initialState, action) => {
@@ -19,6 +20,7 @@ const authReducer = (state = initialState, action) => {
                 ...state,  // Берем данные из state
                 ...action.data,  // В action создаем объект data, в который закидываем наши данные с сервера
                 isAuth: true,
+                userId : action.data.userId
             }
         case SET_CAPTCHA:
             return { ...state, captcha: action.captcha }
@@ -28,12 +30,13 @@ const authReducer = (state = initialState, action) => {
 
 }
 
-export const setAuthUserData = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, data: { userId, email, login, isAuth } })  // Сoздаем наш AC
+export const setAuthUserData = (userId, email, login, isAuth) => ({ type: SET_USER_DATA, data: { userId, email, login, isAuth} })  // Сoздаем наш AC
 export const setCaptcha = (captcha) => ({ type: SET_CAPTCHA, captcha });
 
 export const getAuthUser = () => (dispatch) => {
     return usersAPI.authMe()
         .then(data => {
+            
             if (data.resultCode === 0) {
                 let { id, login, email } = data.data;
                 dispatch(setAuthUserData(id, email, login, true));

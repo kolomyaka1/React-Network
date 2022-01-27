@@ -31,8 +31,11 @@ class App extends React.Component {
             <Nav state={this.props.state.sidebar} />
             <div className='wrapper__content'>
               <Routes >
+                <Route path='/'
+                  element={<Profile />}
+                />
                 <Route path='/Profile'
-                  element={<Profile />}  // Добавляем нужные функции и данные через props из state
+                  element={<ProfileContainer />}  // Добавляем нужные функции и данные через props из state
                 />
                 <Route path='/Profile/:userId'
                   element={<ProfileContainer />}  // Добавляем нужные функции и данные через props из state

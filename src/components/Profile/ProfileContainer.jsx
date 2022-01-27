@@ -7,16 +7,14 @@ import { AuthRedirect } from '../../HOC/AuthReducer';
 
 
 class ProfileContainer extends React.Component {
-
+    
     componentDidMount() {
-        
-        let userId = this.props.match ? this.props.match.params.userId : '';
+        let userId = this.props.match ? this.props.match.params.userId : this.props.userId;
         this.props.getProfile(userId);
         this.props.getUserStatus(userId)
     }
 
     render() {
-
         return (
             <Profile {...this.props} profile={this.props.profile} 
             updateUserStatus={this.props.updateUserStatus} getProfile={this.props.getProfile}
@@ -29,6 +27,7 @@ class ProfileContainer extends React.Component {
 let mapStateToProps = (state) => ({
     profile : state.profilePage.profile,
     status : state.profilePage.status,
+    userId : state.auth.userId
 })
 
 

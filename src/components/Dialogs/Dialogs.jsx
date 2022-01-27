@@ -27,25 +27,18 @@ let Dialogs = (props) => {
         let text = newDialogElement.current.value;
         props.onMessageChange(text)
     }
-
-    
     
     return (
-
         <div className={s.dialogs__wrapper}>
             <div className={s.dialogs__item}>
 
                 {DialogsElements}
 
             </div>
-
             <div className={s.line}></div>
-
             <div className={s.dialogs__messages}>
 
-                {MessagesElements}
-                
-                
+                {MessagesElements}          
                 
                 <div className={s.dialog__send__message}>
                     <input
@@ -58,11 +51,7 @@ let Dialogs = (props) => {
                     />
                     <button onClick={ addMessage } className={s.dialogs__button}>Send</button>
                 </div>
-
-
             </div>
-
-
         </div>
     )
 }
