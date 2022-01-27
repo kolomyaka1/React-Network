@@ -28,7 +28,7 @@ let initialState = {
         },
         {
             id: 3,
-            message: 'Try to chek all users on users page',
+            message: 'Try to check all users on users page',
             likesCounter: 9,
             isLiked : false,
         },

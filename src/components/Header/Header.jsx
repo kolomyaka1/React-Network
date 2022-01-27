@@ -1,6 +1,7 @@
 import s from './Header.module.css';
 import { NavLink } from 'react-router-dom';
-import headerLogo from '../../img/headerLogo';
+import home from '../../img/home.png';
+import {Navigate} from 'react-router-dom'
 
 let Header = (props) => {
 
@@ -11,7 +12,9 @@ let Header = (props) => {
 
     return (
         <header className={s.header}>
-            <img src={headerLogo} alt='header-logo'/>
+            {/* <img src={home} alt='header-logo'/> */}
+            <NavLink to="/Profile"><img src={home} onClick={<Navigate replace to='/Profile' />}  alt='header-logo' /></NavLink>
+            
             <div className={s.login__block}>
                 {props.isAuth 
                 ? <div className={s.header__login}><span className={s.login__username}>{props.login}</span><input type="image" onClick={logout} src="https://img.icons8.com/windows/344/exit.png" /></div>
