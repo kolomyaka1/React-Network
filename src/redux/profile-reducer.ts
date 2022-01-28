@@ -2,6 +2,7 @@ import {
     usersAPI,
     profileAPI
 } from "../components/API/api";
+import { PhotosType, PostType, ProfileType } from "../types/types";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -38,21 +39,23 @@ let initialState = {
             likesCounter: 5,
             isLiked : false,
         },
-    ],
+    ] as Array<PostType>,
     newPostText: '',
-    profile: null,
+    profile: null as ProfileType | null,
     status: '',
-    postId : 5,
-
+    postId : 5 as number,
 }
 
-const profileReducer = (state = initialState, action) => {
+export type InitialStateType = typeof initialState
+
+const profileReducer = (state = initialState, action:any): InitialStateType => {
     switch (action.type) {
         case ADD_POST: {
             let newPost = {
                 id: state.postId++,
                 message: state.newPostText, // Берем данные сообщения из state.
-                likesCounter: Math.floor(Math.random() * 20)
+                likesCounter: Math.floor(Math.random() * 20),
+                isLiked : false
             };
             let stateCopy = {
                 ...state
@@ -88,7 +91,7 @@ const profileReducer = (state = initialState, action) => {
             }
         }
         case SAVE_PHOTO_SUCCESS : {
-            return { ...state, profile : {...state.profile, photos : action.photos}}
+            return { ...state, profile : {...state.profile, photos : action.photos} as ProfileType}
         }
         case LIKE_POST : {
             return { 
@@ -126,72 +129,107 @@ const profileReducer = (state = initialState, action) => {
 
 }
 
-export const addPostActionCreator = () => ({
+
+
+type addPostActionCreatorType = {
+    type : typeof ADD_POST
+}
+export const addPostActionCreator = (): addPostActionCreatorType => ({
     type: ADD_POST
 })
-export const updateNewPostTextActionCreator = (text) => ({
+
+
+type updateNewPostTextActionCreatorType = {
+    type : typeof UPDATE_NEW_POST_TEXT
+    text : string
+}
+export const updateNewPostTextActionCreator = (text:string): updateNewPostTextActionCreatorType => ({
     type: UPDATE_NEW_POST_TEXT,
     text
 })
-export const setUserProfile = (profile) => ({
+
+
+type setUserProfileType = {
+    type : typeof SET_USER_PROFILE
+    profile : ProfileType
+}
+export const setUserProfile = (profile:ProfileType):setUserProfileType => ({
     type: SET_USER_PROFILE,
     profile
 })
-export const setUserStatus = (status) => ({
+
+
+type setUserStatusType = {
+    type : typeof SET_USER_STATUS
+    status : string
+}
+export const setUserStatus = (status:string): setUserStatusType => ({
     type: SET_USER_STATUS,
     status
 })
-export const deletePost = (id) => ({
+
+
+type deletePostType = {
+    type : typeof DELETE_POST
+    id : number
+}
+export const deletePost = (id:number): deletePostType => ({
     type: DELETE_POST,
     id
 })
 
-export const savePhotoSuccess = (photos) => ({
+
+type savePhotoSuccessType = {
+    type : typeof SAVE_PHOTO_SUCCESS
+    photos : PhotosType
+}
+export const savePhotoSuccess = (photos:PhotosType): savePhotoSuccessType => ({
     type: SAVE_PHOTO_SUCCESS,
     photos
 })
 
-export const likePost = (id) => ({
+
+type likePostType = {
+    type : typeof LIKE_POST
+    id : number
+}
+export const likePost = (id:number): likePostType => ({
     type: LIKE_POST,
     id
 })
 
-export const dislikePost = (id) => ({
+
+type dislikePostType = {
+    type : typeof DISLIKE_POST
+    id : number
+}
+export const dislikePost = (id:number): dislikePostType => ({
     type: DISLIKE_POST,
     id
 })
 
-export const getProfile = (id) => {
-    return (dispatch) => {
-        usersAPI.getProfile(id)
-            .then((data) => {
-                dispatch(setUserProfile(data));
-            });
-    }
+
+export const getProfile = (id:number) => async (dispatch:any) => {
+    let promise = await usersAPI.getProfile(id)
+    dispatch(setUserProfile(promise))
 }
 
-export const getUserStatus = (userId) => {
-    return (dispatch) => {
-        profileAPI.getStatus(userId)
-            .then(response => {
-                dispatch(setUserStatus(response.data))
-            });
-    }
+export const getUserStatus = (userId:number) => async (dispatch:any) => {
+    let promise = await profileAPI.getStatus(userId)
+    dispatch(setUserStatus(promise.data))            
 }
 
-export const updateUserStatus = (status) => async (dispatch) => {
+
+export const updateUserStatus = (status:string) => async (dispatch:any) => {
     let response = await profileAPI.updateStatus(status);
-
     if (response.data.resultCode === 0) {
         dispatch(setUserStatus(status))
     }
 }
 
 
-export const savePhoto = (photos) => async (dispatch) => {
-    
+export const savePhoto = (photos:any) => async (dispatch:any) => {
     let response = await profileAPI.updatePhoto(photos);
-    
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))
     }
