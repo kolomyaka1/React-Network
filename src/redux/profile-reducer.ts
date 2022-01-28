@@ -41,7 +41,7 @@ let initialState = {
         },
     ] as Array<PostType>,
     newPostText: '',
-    profile: null as ProfileType | null,
+    profile: null as ProfileType | null,  // object Profile data 
     status: '',
     postId : 5 as number,
 }
@@ -52,9 +52,9 @@ const profileReducer = (state = initialState, action:any): InitialStateType => {
     switch (action.type) {
         case ADD_POST: {
             let newPost = {
-                id: state.postId++,
+                id: state.postId++,  // При создании поста увеличиваем id на 1
                 message: state.newPostText, // Берем данные сообщения из state.
-                likesCounter: Math.floor(Math.random() * 20),
+                likesCounter: Math.floor(Math.random() * 20), 
                 isLiked : false
             };
             let stateCopy = {
@@ -87,7 +87,7 @@ const profileReducer = (state = initialState, action:any): InitialStateType => {
         case DELETE_POST: {
             return {
                 ...state,
-                postsData: state.postsData.filter(p => p.id !== action.id)
+                postsData: state.postsData.filter(p => p.id !== action.id)  
             }
         }
         case SAVE_PHOTO_SUCCESS : {
@@ -228,7 +228,7 @@ export const updateUserStatus = (status:string) => async (dispatch:any) => {
 }
 
 
-export const savePhoto = (photos:any) => async (dispatch:any) => {
+export const savePhoto = (photos:PhotosType) => async (dispatch:any) => {   // thunk для сохранения фото(ава) в профиле
     let response = await profileAPI.updatePhoto(photos);
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))

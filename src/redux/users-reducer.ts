@@ -1,7 +1,7 @@
 import {
     usersAPI
 } from "../components/API/api";
-import { PhotosType } from "../types/types";
+import { UserType } from "../types/types";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -12,12 +12,7 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const TOGGLE_IS_FOLLOWING = 'TOGGLE_IS_FOLLOWING';
 
 
-type UserType = {
-    id: number
-    name: string
-    status: string
-    photos: PhotosType
-}
+
 
 let initialState = {
     users: [] as Array<UserType>,
@@ -107,9 +102,9 @@ export const unfollowSuccess = (userID: number): unfollowSuccessType => ({
 
 type setUsersType = {
     type: typeof SET_USERS
-    users: UserType
+    users: Array<UserType>
 }
-export const setUsers = (users: UserType): setUsersType => ({
+export const setUsers = (users: Array<UserType>): setUsersType => ({
     type: SET_USERS,
     users
 })
@@ -139,7 +134,7 @@ type toggleIsFetchingType = {
     type: typeof TOGGLE_IS_FETCHING
     isFetching: boolean
 }
-export const toggleIsFetching = (isFetching: boolean): toggleIsFetchingType => ({
+export const toggleIsFetching = (isFetching: boolean): toggleIsFetchingType => ({  // Переменная, которая вкл/выкл Loader
     type: TOGGLE_IS_FETCHING,
     isFetching
 })
