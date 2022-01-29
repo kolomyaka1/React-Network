@@ -1,8 +1,14 @@
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import s from './ProfileInfo.module.css'
 
+type PropsType = {
+    status : string
+    updateUserStatus : (status: string) => void
 
-const ProfileStatusWHooks = (props) => {
+}
+
+
+const ProfileStatusWHooks: FC<PropsType> = (props) => {
     // let stateWithSetState = useState(false); // useState возвращает нам массив из 2 элементов в данном случае    
 
     // let editMode = stateWithSetState[0]; // Переменная принимает значение, которое мы передали в аргументе в useState
@@ -26,7 +32,7 @@ const ProfileStatusWHooks = (props) => {
         setEditMode(false);
     }
 
-    const onStatusChange = (e) => {
+    const onStatusChange = (e:React.FormEvent<HTMLInputElement>) => {
         setStatus(e.currentTarget.value)
     }
 

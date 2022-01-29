@@ -28,6 +28,7 @@ export type ProfileType = {  // Type for Profile
     fullName : string
     contacts : ContactsType
     photos : PhotosType
+    isOwner : boolean
 }
 
 export type UserType = {  // Type for users, which we get from APi

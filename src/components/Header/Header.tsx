@@ -7,9 +7,8 @@ import { FC } from 'react';
 
 type PropsType = {
     isAuth : boolean
+    login : string | null
     logout : () => void
-    login : (email:string, password:string, captcha:string) => void
-
 }
 
 let Header: FC<PropsType> = (props) => {

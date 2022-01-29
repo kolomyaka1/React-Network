@@ -44,6 +44,7 @@ let initialState = {
     profile: null as ProfileType | null,  // object Profile data 
     status: '',
     postId : 5 as number,
+    isOwner : false
 }
 
 export type InitialStateType = typeof initialState
