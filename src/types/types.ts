@@ -35,4 +35,13 @@ export type UserType = {  // Type for users, which we get from APi
     name: string
     status: string
     photos: PhotosType
+    followed : boolean
+}
+
+export type PropsType = {
+    totalUsersCount : number
+    pageSize : number
+    currentPage : number
+    onPageChanged : (p:number) => void
+    portionSize? : number
 }

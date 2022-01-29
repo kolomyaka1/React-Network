@@ -1,22 +1,40 @@
 import { connect } from 'react-redux';
 import { follow, unfollow, toggleIsFollowing } from '../../redux/users-reducer';
 import React from 'react';
-import Users from './Users.jsx';
+import Users from './Users.js';
 import Loader from '../preloader/loader.js';
 import {Navigate} from 'react-router-dom'
 import { getUsersThunkCreator } from '../../redux/users-reducer';
 import { getCurrentPage, getIsAuth, getIsFetching, getIsFollowing, getPageSize, getTotalusersCount, getUsers,  } from '../../redux/user-selectors';
 import Pagination from '../Pagination/Pagination';
 import s from './users.module.css'
+import { UserType } from '../../types/types';
+import { AppStateType } from '../../redux/redux-store';
 
-class UsersAPIComponent extends React.Component {
+type PropsType = {
+    currentPage : number
+    pageSize : number
+    totalUsersCount : number
+    isAuth : boolean
+    isFetching : boolean
+    users : Array<UserType>
+    toggleIsFollowing : boolean
+    isFollowing : boolean
+    unfollow : () => void
+    follow : () => void
+    getUsersThunkCreator : (currentPage:number, pageSize:number) => void
+    onPageChanged : (pageNumber: number) => void
+}
+
+
+class UsersAPIComponent extends React.Component<PropsType> {
 
     componentDidMount() {
         this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize);
     }
 
-    onPageChanged = (pageNumber) => {
-        this.props.getUsersThunkCreator(pageNumber);
+    onPageChanged = (pageNumber:number) => {
+        this.props.getUsersThunkCreator(pageNumber, this.props.pageSize);
     }
 
     
@@ -50,7 +68,7 @@ class UsersAPIComponent extends React.Component {
 
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),
@@ -62,10 +80,5 @@ let mapStateToProps = (state) => {
     }
 }
 
-
-export default connect(mapStateToProps, {
-    follow,
-    unfollow,
-    toggleIsFollowing,
-    getUsersThunkCreator,
-})(UsersAPIComponent);
+// @ts-ignore
+export default connect(mapStateToProps, {follow,unfollow,toggleIsFollowing,getUsersThunkCreator,})(UsersAPIComponent);

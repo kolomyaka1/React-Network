@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import s from './paginator.module.css'
+import cn from 'classnames'
+import { PropsType } from '../../types/types';
 
-let Pagination = ({ totalUsersCount, pageSize, currentPage, onPageChanged, portionSize = 10 }) => {
+
+
+
+let Pagination: React.FC<PropsType> = ({ totalUsersCount, pageSize, currentPage, onPageChanged, portionSize = 10 }) => {
     
     let pagesCount = Math.ceil(totalUsersCount / pageSize); // Считаем кол-во наших страниц
 
@@ -20,11 +25,13 @@ let Pagination = ({ totalUsersCount, pageSize, currentPage, onPageChanged, porti
             {portionNumber > 1 &&
                 <button className={s.portion__button} onClick={() => { setPortionNumber(portionNumber - 1) }}>PREV</button>}
 
-            {pages
+            {pages 
                 .filter(p => p >= leftPortionNumber && p <= rightPortionNumber)
                 .map((p) => {
                     return (
-                        <span className={currentPage === p && s.selectedPage}
+                        <span className={cn({
+                            [s.selectedPage] : currentPage === p
+                        }, s.pageNumber) }
                         key={p}
                         onClick={(e) => {
                             onPageChanged(p);

@@ -14,10 +14,14 @@ let reducers = combineReducers({profilePage : profileReducer,
                                 usersPage : usersReducer,
                                 auth : authReducer,
                                 app : appReducer
-                                });
+                                })
+
+
+type ReducerType = typeof reducers; // (globalstate : AppStateType) => AppStateType 
+export type AppStateType = ReturnType<ReducerType>
+
+
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));
-
-window.store = store;
 
 export default store;

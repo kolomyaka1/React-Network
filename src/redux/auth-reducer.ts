@@ -7,8 +7,8 @@ export type InitialStateType2 = {
     userId: number | null
     email: string | null
     login: string | null
-    isFetching: boolean | null
-    isAuth: boolean | null
+    isFetching: boolean 
+    isAuth: boolean
     captcha: string | null
 }
 

@@ -1,9 +1,23 @@
-import React from 'react';
+import React,{FC} from 'react';
 import s from './users.module.css';
 import {NavLink} from 'react-router-dom';
+import { UserType } from '../../types/types';
+
+type PropsType = {
+    totalUsersCount : number
+    pageSize : number
+    currentPage : number
+    onPageChanged : (pageNumber : number) => void
+    isAuth : boolean
+    isFollowing : boolean
+    toggleIsFollowing : boolean
+    users : Array<UserType>
+    unfollow : (id: number) => void
+    follow : (id: number) => void
+}
 
 
-let Users = (props) => {
+let Users: FC<PropsType>  = (props) => {
 
     return <div>
         <div className={s.page__wrapper}>

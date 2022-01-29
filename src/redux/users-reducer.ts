@@ -21,6 +21,7 @@ let initialState = {
     currentPage: 1,
     isFetching: false,
     isFollowing: false,
+    followed : false
 };
 
 export type InitialStateType = typeof initialState
