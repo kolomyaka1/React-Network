@@ -28,7 +28,7 @@ class App extends React.Component {
         <BrowserRouter>
           <div className='wrapper'>
             <HeaderContainer />
-            <Nav state={this.props.state.sidebar} />
+            <Nav friendName={this.props.state.sidebar.friendName} />
             <div className='wrapper__content'>
               <Routes >
                 <Route path='/'

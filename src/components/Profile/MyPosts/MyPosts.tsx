@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { PostType, ProfileType } from '../../../types/types';
 import Loader from '../../preloader/loader';
 import s from './MyPosts.module.css';
 import Post from './Post/Post';
 
 
+type PropsType = {
+    posts : Array<PostType>
+    newPostText : string
+    login : string | null
+    profile : ProfileType | null
+    updateNewPostText : (text:string) => void
+    addPost : () => void
+    deletePost : (id:number) => void
+    likePost : (id:number) => void
+    dislikePost : (id:number) => void
+}
 
 
-let MyPosts = (props) => { // С помощью функции maps отрисовываем каждый элемент из props.state в созданную нами компоненту 
+let MyPosts: FC<PropsType> = (props) => { // С помощью функции maps отрисовываем каждый элемент из props.state в созданную нами компоненту 
     
     if (!props.profile) {
         return <Loader />
@@ -25,15 +37,18 @@ let MyPosts = (props) => { // С помощью функции maps отрисо
     />
     )
 
-    let newPostElement = React.createRef();  // Привязываем ссылку на элемент на сайте для манипуляции над ним
+    let newPostElement = React.createRef<HTMLInputElement>();  // Привязываем ссылку на элемент на сайте для манипуляции над ним
 
     let addPost = () => {  // Данные функции создали также в state и передали их сюда
         props.addPost();
     }
 
     let onPostChange = () => { // Данные функции создали также в state и передали их сюда
-        let text = newPostElement.current.value;  // Сохраняем значение textarea в переменную
-        props.updateNewPostText(text)
+        if (newPostElement.current) {
+            let text = newPostElement.current.value;  // Сохраняем значение textarea в переменную
+            props.updateNewPostText(text)
+        }
+
     }
 
     return (

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { follow, unfollow, toggleIsFollowing } from '../../redux/users-reducer';
 import React from 'react';
-import Users from './Users.js';
+import Users from './Users';
 import Loader from '../preloader/loader.js';
 import {Navigate} from 'react-router-dom'
 import { getUsersThunkCreator } from '../../redux/users-reducer';
@@ -11,21 +11,34 @@ import s from './users.module.css'
 import { UserType } from '../../types/types';
 import { AppStateType } from '../../redux/redux-store';
 
-type PropsType = {
-    currentPage : number
-    pageSize : number
+type MapStatePropsType = {
+    pageSize: number
+    isFetching: boolean
+    currentPage: number
+    isFollowing: boolean
+    isAuth: boolean
+    users: Array<UserType>
     totalUsersCount : number
-    isAuth : boolean
-    isFetching : boolean
-    users : Array<UserType>
-    toggleIsFollowing : boolean
-    isFollowing : boolean
-    unfollow : () => void
-    follow : () => void
-    getUsersThunkCreator : (currentPage:number, pageSize:number) => void
-    onPageChanged : (pageNumber: number) => void
 }
 
+type MapDispatchPropsType = {
+    unfollow : (userId:number) => void
+    follow : (userId:number) => void
+    getUsersThunkCreator : (currentPage:number, pageSize:number) => void
+
+
+}
+
+type OwnPropsType = {
+
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType // Объединение всех вход. props
+
+// Можем объявить 3 вида входящих props.
+// 1. MapDispatchTP -- Это то, что приходит к нам через connect
+// 2. MapStateTP  -- Это то, что приходит к нам через connect
+// 3. OwnProps - Это те пропсы, которые мы получаем от родительского элемента 
 
 class UsersAPIComponent extends React.Component<PropsType> {
 
@@ -58,7 +71,6 @@ class UsersAPIComponent extends React.Component<PropsType> {
                     users={this.props.users}
                     unfollow={this.props.unfollow}
                     follow={this.props.follow}
-                    toggleIsFollowing={this.props.toggleIsFollowing}
                     isFollowing={this.props.isFollowing}
                     isAuth={this.props.isAuth}
                 />}
@@ -68,7 +80,7 @@ class UsersAPIComponent extends React.Component<PropsType> {
 
 }
 
-let mapStateToProps = (state: AppStateType) => {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         users: getUsers(state),
         pageSize: getPageSize(state),
@@ -80,5 +92,5 @@ let mapStateToProps = (state: AppStateType) => {
     }
 }
 
-// @ts-ignore
-export default connect(mapStateToProps, {follow,unfollow,toggleIsFollowing,getUsersThunkCreator,})(UsersAPIComponent);
+
+export default connect<MapStatePropsType, MapDispatchPropsType, null, AppStateType>(mapStateToProps, {follow,unfollow,getUsersThunkCreator,})(UsersAPIComponent);

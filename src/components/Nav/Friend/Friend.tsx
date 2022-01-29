@@ -1,13 +1,19 @@
+import { FC } from 'react';
+import { AppStateType } from '../../../redux/redux-store';
+import { FriendNameType } from '../../../types/types';
 import s from './Friend.module.css'
 import FriendItem from './FriendItem/FriendItem';
 
+type PropsType = {
+    friendName : Array<FriendNameType>
+}
 
-let Friend = (props) => {
-    
+let Friend: FC<PropsType> = (props) => {
 
-    let FriendElement = props.state.friendName.map(el =>
+    let FriendElement = props.friendName.map(el =>
         <FriendItem name={el.name} />
     )
+    
     return (
         <div className={`${s.item}  ${s.friend}`}>
             <a className={s.friends__link}>Friends</a>

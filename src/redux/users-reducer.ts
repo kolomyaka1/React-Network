@@ -21,7 +21,7 @@ let initialState = {
     currentPage: 1,
     isFetching: false,
     isFollowing: false,
-    followed : false
+    followed: false
 };
 
 export type InitialStateType = typeof initialState
@@ -48,7 +48,7 @@ const usersReducer = (state = initialState, action: any): InitialStateType => {
                     if (u.id === action.userID) {  // Возвращаем новый массив и у пользователя на которого нажали меняем св-ва followed
                         return {
                             ...u,
-                            followed: false 
+                            followed: false
                         }
                     }
                     return u;

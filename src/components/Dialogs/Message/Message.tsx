@@ -1,7 +1,12 @@
+import { FC } from 'react';
 import s from './Message.module.css';
 
 
-let Message = (props) => {
+type PropsType = {
+    message : string
+}
+
+let Message: FC<PropsType> = (props) => {
     return (
         <div className={s.message__wrapper}>
             <div>

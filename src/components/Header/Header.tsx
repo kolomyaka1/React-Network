@@ -2,8 +2,17 @@ import s from './Header.module.css';
 import { NavLink } from 'react-router-dom';
 import home from '../../img/home.png';
 import {Navigate} from 'react-router-dom'
+import { FC } from 'react';
 
-let Header = (props) => {
+
+type PropsType = {
+    isAuth : boolean
+    logout : () => void
+    login : (email:string, password:string, captcha:string) => void
+
+}
+
+let Header: FC<PropsType> = (props) => {
 
     const logout = () => {
         props.logout();
@@ -12,7 +21,7 @@ let Header = (props) => {
 
     return (
         <header className={s.header}>
-            {/* <img src={home} alt='header-logo'/> */}
+            {/* @ts-ignore  Ошибка на OnClick Пока не знаю как исправить :(  */ }  
             <NavLink to="/Profile"><img src={home} onClick={<Navigate replace to='/Profile' />}  alt='header-logo' /></NavLink>
             
             <div className={s.login__block}>

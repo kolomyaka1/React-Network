@@ -1,7 +1,5 @@
-type friendNameType = {
-    id : number
-    name : string
-}
+import { FriendNameType } from "../types/types";
+
 
 let initialState = {
     friendName:
@@ -9,7 +7,7 @@ let initialState = {
             { id: 1, name: 'Jenya' },
             { id: 2, name: 'Danya' },
             { id: 3, name: 'Misha' },
-        ] as Array<friendNameType>
+        ] as Array<FriendNameType>
 }
 
 export type InitialStateType = typeof initialState

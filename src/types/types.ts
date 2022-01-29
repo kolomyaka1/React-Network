@@ -45,3 +45,19 @@ export type PropsType = {
     onPageChanged : (p:number) => void
     portionSize? : number
 }
+
+
+export type DialogType = {
+    id : number
+    name : string
+}
+
+export type MessageType = {
+    id : number 
+    message : string
+}
+
+export type FriendNameType = {
+    id : number
+    name : string
+}

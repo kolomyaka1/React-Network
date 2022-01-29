@@ -1,6 +1,11 @@
+import { FC } from 'react';
 import s from './../Friend.module.css'
 
-let FriendItem = (props) => {
+type PropsType = {
+    name : string
+}
+
+let FriendItem: FC<PropsType> = (props) => {
     return (
         <a href="#">
             <div className={s.friend__item}><img className={s.friend__img} src="https://html5css.ru/howto/img_avatar.png" alt="ava-img" />
