@@ -2,6 +2,9 @@ import {
     usersAPI
 } from "../components/API/api";
 import { UserType } from "../types/types";
+import { AppStateType } from "./redux-store";
+import { Dispatch } from "redux"
+import { ThunkAction } from "redux-thunk";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -24,9 +27,13 @@ let initialState = {
     followed: false
 };
 
-export type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState  // Указываем тип для нашего стейта в u-r
 
-const usersReducer = (state = initialState, action: any): InitialStateType => {
+
+type ActionsType =  followSuccessType | unfollowSuccessType | setUsersType | setCurrentPageType |   // Указываем какие action может принимать наш reducer
+                    setToTotalUsersCountType | toggleIsFetchingType | toggleIsFollowingType
+
+const usersReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -80,6 +87,11 @@ const usersReducer = (state = initialState, action: any): InitialStateType => {
 
 }
 
+// ===========================================  ACTIONS  =================================================
+// Способ типизирования Action
+// 1. Создаем новый тип для каждого action
+// 2. Указываем его type и значение которое принимает action
+// 3. Привязываем наш созданный тип к action
 
 type followSuccessType = {
     type: typeof FOLLOW
@@ -151,26 +163,43 @@ export const toggleIsFollowing = (isFetching: boolean): toggleIsFollowingType =>
 })
 
 
-export const getUsersThunkCreator = (currentPage: number, pageSize: number) => async (dispatch: any) => {
+// ===========================================  THUNKS ================================= 
+// Способ типизирования THUNKS 
+// 1. Указываем в диспатч Dispatch< actions >
+// 2. Указываем второй параметр у thusnkCreat => getState() : => Который возвращает наш state
+
+// Либо указываем ThunkAction(Специально созданный тип уже самими разраб.)
+// 1. Первый параметр указывает, что мы возвращаем
+// 2. Указываем наш корневой state - AppStateType
+// 3. Extra Arguments - пока не знаю что это.... но надо узнать!
+// 4. Указываем наши actions
+
+type GetStateType = () => AppStateType  // Создаем отдельный тип для thunks
+type DispatchType = Dispatch<ActionsType>
+type ThunksType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsType>
+
+export const getUsersThunkCreator = (currentPage: number, pageSize: number): ThunksType => async (dispatch, getState) => {  // getState - возвращает state целиком
     dispatch(toggleIsFetching(true))  // Включаем Loader
+    dispatch(setCurrentPage(currentPage));  // Функция для переключения страницы 
     let promise = await usersAPI.getUsers(currentPage, pageSize); // Создаем функцию thunk и убираем ее из UI и передаем в BLL
     // Прячем наш запрос в отдельный файл, для того чтобы наша компонента не выполняла запросы на сервер
     dispatch(toggleIsFetching(false));  // После получения запроса от сервера отключаем Loader
     dispatch(setUsers(promise.items)); // Загружаем пользователей
     dispatch(setToTotalUsersCount(promise.totalCount)); // Устанавливаем общ. кол-во пользователей
-    dispatch(setCurrentPage(currentPage));  // Функция для переключения страницы 
 };
 
 
 
-export const follow = (id: number) => async (dispatch: any) => {
+export const follow = (id: number): ThunksType =>
+    async (dispatch, getState) => {
     let promise = await usersAPI.followUser(id)
     if (promise.resultCode === 0) {
         dispatch(followSuccess(id));  // Передаем информацию о подписке на пользователя
     }
 };
 
-export const unfollow = (id: number) => async (dispatch: any) => {
+export const unfollow = (id: number): ThunksType =>
+    async (dispatch) => {
     let promise = await usersAPI.unfollowUser(id)
     if (promise.resultCode === 0) {
         dispatch(unfollowSuccess(id));  // Передаем информацию об отписке от пользователя

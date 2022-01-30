@@ -54,7 +54,7 @@ let Dialogs: FC<PropsType> = (props) => {
                     className={s.dialogs__add} 
                     ref={ newDialogElement }
                     value={props.newMessageText}
-                    placeholder='Сообщение'
+                    placeholder='Message...'
                     />
                     <button onClick={ addMessage } className={s.dialogs__button}>Send</button>
                 </div>

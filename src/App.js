@@ -35,10 +35,10 @@ class App extends React.Component {
                   element={<Profile />}
                 />
                 <Route path='/Profile'
-                  element={<ProfileContainer />}  // Добавляем нужные функции и данные через props из state
+                  element={<Profile />} 
                 />
                 <Route path='/Profile/:userId'
-                  element={<ProfileContainer />}  // Добавляем нужные функции и данные через props из state
+                  element={<ProfileContainer />} 
                 />
                 <Route path='/Dialogs/*'
                   element={<DialogsContainer />}

@@ -62,3 +62,4 @@ export type FriendNameType = {
     id : number
     name : string
 }
+
