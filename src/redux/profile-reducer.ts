@@ -237,7 +237,7 @@ export const updateUserStatus = (status:string): ThunksType => async (dispatch) 
 }
 
 
-export const savePhoto = (photos:PhotosType): ThunksType => async (dispatch) => {   // thunk для сохранения фото(ава) в профиле
+export const savePhoto = (photos:any): ThunksType => async (dispatch) => {   // thunk для сохранения фото(ава) в профиле
     let response = await profileAPI.updatePhoto(photos);
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))
