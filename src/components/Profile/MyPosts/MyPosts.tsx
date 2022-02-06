@@ -56,7 +56,7 @@ let MyPosts: FC<PropsType> = (props) => { // С помощью функции ma
             <h3 className={s.myPosts__title}>My posts</h3>
             <div>
                 <div className={s.post__edit}>
-                    <input onChange={onPostChange} type="text" placeholder='Сделай новый пост!' // При изменении в textarea вызываем нашу функцию
+                    <input onChange={onPostChange} type="text" placeholder='Create new post!' // При изменении в textarea вызываем нашу функцию
                         className={s.post__area} ref={newPostElement}
                         value={props.newPostText} // Значение берем не с UI, а из state
                     />

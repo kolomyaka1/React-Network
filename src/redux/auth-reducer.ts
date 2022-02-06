@@ -1,16 +1,11 @@
-import { authAPI, usersAPI } from '../components/API/api'
+import { ThunkAction } from 'redux-thunk';
+import { authAPI, ResultCodesEnum } from '../components/API/api'
+import { AppStateType } from './redux-store';
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_CAPTCHA = 'SET_CAPTCHA';
 
-export type InitialStateType2 = {
-    userId: number | null
-    email: string | null
-    login: string | null
-    isFetching: boolean 
-    isAuth: boolean
-    captcha: string | null
-}
+
 
 let initialState = {  // Указываем какие данные нам приходят от сервера
     userId: null as number | null,
@@ -23,9 +18,10 @@ let initialState = {  // Указываем какие данные нам пр�
 }
 
 export type InitialStateType = typeof initialState
+type ActionsType = SetAuthUserDataActionType | setCaptchaActionType
 
 
-const authReducer = (state = initialState, action: any): InitialStateType2 => {
+const authReducer = (state = initialState, action: ActionsType): InitialStateType => {
     switch (action.type) {
         case SET_USER_DATA: // Указываем какой тип нам может возвращать AC
             return {
@@ -41,6 +37,9 @@ const authReducer = (state = initialState, action: any): InitialStateType2 => {
     }
 
 }
+
+// ===========================================  ACTIONS  =================================================
+
 
 type SetAuthUserDataActionPayloadType = {
     userId: number | null
@@ -59,38 +58,43 @@ type setCaptchaActionType = {
     captcha: string
 }
 
+
 export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean): SetAuthUserDataActionType => ({ type: SET_USER_DATA, data: { userId, email, login, isAuth } })  // Сoздаем наш AC
 export const setCaptcha = (captcha: string): setCaptchaActionType => ({ type: SET_CAPTCHA, captcha });
 
-export const getAuthUser = () => async (dispatch: any) => {
-    let response = await usersAPI.authMe();
-    if (response.resultCode === 0) {
+// ===========================================  THUNKS ================================= 
+
+type ThunksType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsType>
+
+export const getAuthUser = (): ThunksType => async (dispatch) => {
+    let response = await authAPI.authMe();
+    if (response.resultCode === ResultCodesEnum.Succes) {
         let { id, login, email } = response.data;
         dispatch(setAuthUserData(id, email, login, true));
     }
 };
 
 
-export const getCaptcha = () => async (dispatch:any) => {
+export const getCaptcha = (): ThunksType => async (dispatch) => {
     let response = await authAPI.getCaptcha();
     dispatch(setCaptcha(response.data.url))
 }
 
 
-export const login = (email:string, password:string, captcha:string) =>  async (dispatch:any) => {
+export const login = (email:string, password:string, captcha:string): ThunksType =>  async (dispatch) => {
     let response = await authAPI.login(email, password, captcha);
-        if (response.data.resultCode === 0) {
+        if (response.resultCode === ResultCodesEnum.Succes) {
             dispatch(getAuthUser())
-        } else if (response.data.resultCode === 10) {
+        } else if (response.resultCode === ResultCodesEnum.CaptchaIsRequired) {
             dispatch(getCaptcha())
-        } else if (response.data.resultCode === 1) {
+        } else if (response.resultCode === 1) {
             alert('Неверный email или пароль')
         }
 }
 
-export const logout = () =>  async (dispatch:any) => {
+export const logout = (): ThunksType =>  async (dispatch:any) => {
     let response = await authAPI.logout();
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultCodesEnum.Succes) {
         dispatch(setAuthUserData(null,null,null,false))
     }
 }

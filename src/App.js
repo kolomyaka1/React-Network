@@ -14,6 +14,7 @@ import LoginContainer from './components/Login/LoginContainer';
 import { connect } from 'react-redux';
 import { initializeApp } from './redux/app-reducer'
 import Loader from './components/preloader/loader';
+import NewsContainer from './components/News/NewsContainer';
 
 class App extends React.Component {
   
@@ -35,10 +36,10 @@ class App extends React.Component {
                   element={<Profile />}
                 />
                 <Route path='/Profile'
-                  element={<ProfileContainer />}  // Добавляем нужные функции и данные через props из state
+                  element={<Profile />} 
                 />
                 <Route path='/Profile/:userId'
-                  element={<ProfileContainer />}  // Добавляем нужные функции и данные через props из state
+                  element={<ProfileContainer />} 
                 />
                 <Route path='/Dialogs/*'
                   element={<DialogsContainer />}
@@ -47,7 +48,7 @@ class App extends React.Component {
                   element={<UsersContainer />}
                 />
                 <Route path='/News'
-                  element={<News />}
+                  element={<NewsContainer />}
                 />
                 <Route path='/Music'
                   element={<Music />}
