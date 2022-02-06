@@ -1,7 +1,7 @@
 import dialogsReducer from "./dialogs-reducer";
 import profileReducer from "./profile-reducer";
 import sidebarReducer from "./sidebar-reducer";
-
+import newsReducer from './news-reducer';
 
 let store = {
     _state: {
@@ -44,6 +44,9 @@ let store = {
                     { id: 3, name: 'Misha' },
                 ]
         },
+        news : {
+            
+        }
     },
     getState() {
         return this._state;
@@ -60,7 +63,7 @@ let store = {
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
         this._state.sidebar = sidebarReducer(this._state.sidebar, action);
-
+        this._state.news = newsReducer(this._state.news, action);
         this._callSubscriber(this._state);
     }
 }
