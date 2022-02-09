@@ -1,4 +1,4 @@
-import { authAPI, usersAPI } from '../components/API/api'
+import { authAPI } from '../components/API/api'
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_CAPTCHA = 'SET_CAPTCHA';
@@ -26,6 +26,7 @@ export type InitialStateType = typeof initialState
 
 
 const authReducer = (state = initialState, action: any): InitialStateType2 => {
+    
     switch (action.type) {
         case SET_USER_DATA: // Указываем какой тип нам может возвращать AC
             return {
@@ -62,10 +63,10 @@ type setCaptchaActionType = {
 export const setAuthUserData = (userId: number | null, email: string | null, login: string | null, isAuth: boolean): SetAuthUserDataActionType => ({ type: SET_USER_DATA, data: { userId, email, login, isAuth } })  // Сoздаем наш AC
 export const setCaptcha = (captcha: string): setCaptchaActionType => ({ type: SET_CAPTCHA, captcha });
 
-export const getAuthUser = () => async (dispatch: any) => {
-    let response = await usersAPI.authMe();
-    if (response.resultCode === 0) {
-        let { id, login, email } = response.data;
+export const getAuthUser = ():any => async (dispatch: any) => {
+    let response = await authAPI.authMe();
+    if (response.data.resultCode === 0) {
+        let { id, login, email } = response.data.data;
         dispatch(setAuthUserData(id, email, login, true));
     }
 };
@@ -79,11 +80,11 @@ export const getCaptcha = () => async (dispatch:any) => {
 
 export const login = (email:string, password:string, captcha:string) =>  async (dispatch:any) => {
     let response = await authAPI.login(email, password, captcha);
-        if (response.data.resultCode === 0) {
+        if (response.resultCode === 0) {
             dispatch(getAuthUser())
-        } else if (response.data.resultCode === 10) {
+        } else if (response.resultCode === 10) {
             dispatch(getCaptcha())
-        } else if (response.data.resultCode === 1) {
+        } else if (response.resultCode === 1) {
             alert('Неверный email или пароль')
         }
 }

@@ -86,7 +86,7 @@ type AuthMeType = {
         login : string
         email : string
     }
-    resultCode : ResultCodesEnum
+    resultCode : number
     messages : Array<string>
 }
 
@@ -117,7 +117,6 @@ export const authAPI = {
     },
     authMe() {
         return instance.get<AuthMeType>(`auth/me`)
-        .then(response => response.data)
     },
 }
 

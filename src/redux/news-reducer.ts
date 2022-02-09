@@ -12,7 +12,7 @@ let initialState = {
 export type InitialStateType = typeof initialState
 
 const newsReducer = (state = initialState, action:any):InitialStateType => {
-    debugger
+    
     switch (action.type) {
         case GET_NEWS : {
             return {
