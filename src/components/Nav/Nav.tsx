@@ -1,12 +1,17 @@
 import s from './Nav.module.css';
 import { NavLink } from 'react-router-dom';
 import Friend from './Friend/Friend';
+import { FC } from 'react';
+import { AppStateType } from '../../redux/redux-store';
+import { FriendNameType } from '../../types/types';
 
+type PropsType = {
+    friendName : Array<FriendNameType>
+}
 
-
-let Nav = (props) => {
+let Nav: FC<PropsType> = (props) => {
     return (
-        <nav nav className={s.nav} >
+        <nav className={s.nav} >
             <div className={s.item}>
                 <NavLink to="/Profile">Profile</NavLink>
             </div>
@@ -25,7 +30,7 @@ let Nav = (props) => {
             <div className={s.item}>
                 <NavLink to='/Settings'>Settings</NavLink>
             </div>
-            <Friend state={props.state} />
+            <Friend friendName={props.friendName} />
         </nav >
     )
 }

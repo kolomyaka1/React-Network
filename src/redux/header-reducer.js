@@ -14,4 +14,4 @@ const headerReducer = () => {
     return state;
 }
 
-export default headerReducers;
+export default headerReducer;

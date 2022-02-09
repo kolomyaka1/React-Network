@@ -6,10 +6,19 @@
     align-items: center;
 }
 
+.header__img_block {
+    width: 60px;
+    height: 60px;
+
+}
+
 .header img {
-    width: 55px;
-    height: 55px;
-    padding-left: 25px;
+    width: 35px;
+    height: 35px;
+    margin-left: 25px;
+    border-radius: 50%;
+    padding: 7px;
+    background-color: white;
 }
 
 .login__block {
@@ -26,3 +35,25 @@
 .login__link {
     display: inline;
 }
+
+.header__login {
+    display: flex;
+    align-items: center;
+}
+
+.header__login input {
+    width: 25px;
+    height: 25px;
+    background-color: #fff;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 5px 5px;
+    transition: all 300ms ease-in-out;
+    margin-left: 10px;
+}
+
+.header__login input:hover {
+    background-color:#fff;
+    transition: all 300ms ease-in-out;
+}
+
