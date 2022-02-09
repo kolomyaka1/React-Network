@@ -21,7 +21,6 @@
     padding: 10px;
     display: flex;
     flex-direction: column;
-    margin-left: 15px;
     /* flex-wrap: wrap;
     align-content: space-around;
     justify-content: flex-start; */
@@ -36,36 +35,12 @@
 }
 
 .dialogs__add {
-    width: 300px;
-    font-size: 14px;
-    padding: 7px 0 7px 10px;
-    background: #F6F6F6;
-    border-radius: 8px;
-    border: none;
-    outline:none;
-    margin-right: 15px;
-    
+    width: 30%;
+    resize: none;
+    margin-right: 25px;
 }
 
 .dialog__send__message {
     display: flex;
     align-items: center;
 }
-
-.dialog__send__message button:hover{
-    background-color:#333;
-    color: white;
-    transition: all 300ms ease-in-out;
-}
-
-.dialogs__button {
-    background-color: gainsboro;
-    border: 1px solid #333;
-    color: black;
-    border-radius: 10px;
-    line-height: 18px;
-    cursor: pointer;
-    padding: 5px 15px;
-    transition: all 300ms ease-in-out;
-}
-

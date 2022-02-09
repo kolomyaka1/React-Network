@@ -1,25 +1,25 @@
-import React,{FC} from 'react';
+import React from 'react';
 import s from './users.module.css';
 import {NavLink} from 'react-router-dom';
-import { UserType } from '../../types/types';
-
-type PropsType = {
-    totalUsersCount : number
-    pageSize : number
-    currentPage : number
-    onPageChanged : (pageNumber : number) => void
-    isAuth : boolean
-    isFollowing : boolean
-    users : Array<UserType>
-    unfollow : (userId: number) => void
-    follow : (userId: number) => void
-}
 
 
-let Users: FC<PropsType>  = (props) => {
+
+let Users = (props) => {
+    
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+        if (pages.length < 10) {
+            pages.push(i);
+        }
+    }
 
     return <div>
         <div className={s.page__wrapper}>
+            {pages.map(p => {
+                return <span className={props.currentPage === p && s.selectedPage} onClick={(e) => { props.onPageChanged(p) }}>{p}</span>
+            })}
         </div>
         {
             props.users.map(u => <div key={u.id} className={s.users__wrapper}>
@@ -36,7 +36,7 @@ let Users: FC<PropsType>  = (props) => {
                             <button className={s.users__button} onClick={() => {
                                 props.unfollow(u.id);
                             }}>unfollow</button> :
-                            <button className={s.users__button} onClick={() => {                                            
+                            <button className={s.users__button}  onClick={() => {                                            
                                 props.follow(u.id);
                             }}>follow</button>}
 
