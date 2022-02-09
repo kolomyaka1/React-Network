@@ -1,6 +1,7 @@
+import { PhotosType } from './../types/types';
 import { profileAPI } from './../components/API/profile-api';
 import { usersAPI } from "../components/API/users-api";
-import { PhotosType, PostType, ProfileType } from "../types/types";
+import { PostType, ProfileType } from "../types/types";
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -209,7 +210,7 @@ export const dislikePost = (id:number): dislikePostType => ({
 
 
 export const getProfile = (id:number) => async (dispatch:any) => {
-    let promise = await usersAPI.getProfile(id)
+    let promise = await profileAPI.getProfile(id)
     dispatch(setUserProfile(promise))
 }
 
@@ -227,10 +228,10 @@ export const updateUserStatus = (status:string) => async (dispatch:any) => {
 }
 
 
-export const savePhoto = (photos:any) => async (dispatch:any) => {   // thunk для сохранения фото(ава) в профиле
+export const savePhoto = (photos:string) => async (dispatch:any) => {   // thunk для сохранения фото(ава) в профиле
     let response = await profileAPI.updatePhoto(photos);
-    if (response.data.resultCode === 0) {
-        dispatch(savePhotoSuccess(response.data.data.photos))
+    if (response.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.photos))
     }
 }
 

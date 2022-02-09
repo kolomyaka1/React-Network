@@ -23,6 +23,12 @@ export enum ResultCodesEnum  {
     CaptchaIsRequired = 10,
 }
 
+export type ResponseType<D = {}> = {
+    data : D
+    messages : Array<string>
+    resultCode : ResultCodesEnum
+}
+
 
 
 

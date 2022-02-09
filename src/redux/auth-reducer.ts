@@ -74,7 +74,7 @@ export const getAuthUser = ():any => async (dispatch: any) => {
 
 export const getCaptcha = () => async (dispatch:any) => {
     let response = await authAPI.getCaptcha();
-    dispatch(setCaptcha(response.data.url))
+    dispatch(setCaptcha(response.url))
 }
 
 

@@ -1,29 +1,29 @@
-import { instance, ResultCodesEnum } from "./api";
+import { PhotosType, ProfileType } from "../../types/types";
+import { instance, ResponseType } from "./api";
 
-type UpdateStatusType = {
-    resultCode : ResultCodesEnum
-    messages : Array<string>
-    data : {
-        status : string
-    }
+type SavePhotoReponseDataType = {
+    photos : PhotosType
 }
-
 
 
 export const profileAPI = {
     getStatus(userId:number) {
-        return instance.get(`profile/status/${userId}`);
+        return instance.get<string>(`profile/status/${userId}`);
     },
     updateStatus(status:string) {
-        return instance.put<UpdateStatusType>(`profile/status`, {status : status});
+        return instance.put<ResponseType>(`profile/status`, {status : status});
     },
     updatePhoto(photos:string) {
         const formData = new FormData();
         formData.append('image', photos);
-        return instance.put(`profile/photo`, formData , {
+        return instance.put<ResponseType<SavePhotoReponseDataType>>(`profile/photo`, formData , {
             headers : {
                 'Content-Type' : 'multipart/form-data'
             }
-        });
+        }).then(response => response.data)
+    },
+    getProfile(id:number) {
+        return instance.get<ProfileType>(`profile/${id}`)
+        .then(response => response.data)
     },
 }

@@ -1,11 +1,5 @@
-import { instance, ResultCodesEnum } from "./api";
+import { instance, ResponseType, ResultCodesEnum } from "./api";
 
-
-type ResponseType<D = {}> = {
-    data : D
-    messages : Array<string>
-    resultCode : ResultCodesEnum
-}
 
 type LoginResponseType = {
         userId: number
@@ -38,7 +32,8 @@ export const authAPI = {
         return instance.delete<ResponseType<LogoutResponseType>>('auth/login');
     },
     getCaptcha() {
-        return instance.get<GetCaptchaType>('security/get-captcha-url');
+        return instance.get<GetCaptchaType>('security/get-captcha-url')
+        .then(response => response.data)
     },
     authMe() {
         return instance.get<ResponseType<AuthMeType>>(`auth/me`)
