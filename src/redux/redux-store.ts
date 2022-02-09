@@ -15,7 +15,7 @@ let reducers = combineReducers({profilePage : profileReducer,
                                 usersPage : usersReducer,
                                 auth : authReducer,
                                 app : appReducer,
-                                news : newsReducer
+                                news : newsReducer,
                                 })
 
 

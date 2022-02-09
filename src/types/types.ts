@@ -63,8 +63,6 @@ export type FriendNameType = {
     name : string
 }
 
-export type PostsDataType = {
+export type NewsType = {
     id : number
-    message : string
-    author : string
 }

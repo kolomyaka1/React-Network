@@ -1,34 +1,49 @@
-import { AppStateType } from "../../redux/redux-store"
+import React from "react";
 import { connect } from "react-redux";
+import { getNews } from "../../redux/news-reducer";
+import { AppStateType } from "../../redux/redux-store";
+import { NewsType } from "../../types/types";
 import News from "./News";
 
-type PostsDataType = {
-    id : number
-    message : string
-    author : string
-}
 
 type MapStateToPropsType = {
-    newsPosts : Array<PostsDataType>
+    newsData : Array<NewsType>
 }
+
 
 type MapDispatchToPropsType = {
+    getNews : () => void
+} 
 
-}
+type sourceType = MapDispatchToPropsType & MapStateToPropsType
 
-let mapStateToProps = (state: AppStateType) => {
-    return {
-        newsPosts : state.news.postsData,
+class NewsContainer extends React.Component<sourceType>  {
+    
+    componentDidMount() {
+        this.props.getNews()       
+    }
+    
+    render() {
+        return (
+            <div>
+                <News />
+            </div>
+        )
     }
 }
 
-
-let mapDispatchToProps = (state: AppStateType) => {
+let mapStateToProps = (state:AppStateType): MapStateToPropsType => {
     return {
+        newsData : state.news.newsData,
+    } 
+}
 
+let MapDispatchToProps = (dispatch:any): MapDispatchToPropsType => {
+    return {
+        getNews : () => {
+            dispatch(getNews())
+        },
     }
 }
 
-const NewsContainer = connect(mapStateToProps, mapDispatchToProps)(News)
-
-export default NewsContainer
+export default connect<MapStateToPropsType, MapDispatchToPropsType, null, AppStateType>(mapStateToProps, MapDispatchToProps)(NewsContainer);
