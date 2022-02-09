@@ -1,7 +1,5 @@
- import {
-    usersAPI,
-    profileAPI
-} from "../components/API/api";
+import { profileAPI } from './../components/API/profile-api';
+import { usersAPI } from "../components/API/users-api";
 import { PhotosType, PostType, ProfileType } from "../types/types";
 
 const ADD_POST = 'ADD-POST';

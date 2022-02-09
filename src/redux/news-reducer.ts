@@ -1,4 +1,4 @@
-import { newsAPI } from "../components/API/api";
+import { newsAPI } from "../components/API/news-api";
 import { NewsType } from "../types/types";
 
 

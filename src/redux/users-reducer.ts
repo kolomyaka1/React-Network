@@ -1,6 +1,5 @@
-import {
-    usersAPI
-} from "../components/API/api";
+
+import { usersAPI } from "../components/API/users-api";
 import { UserType } from "../types/types";
 
 const FOLLOW = 'FOLLOW';
