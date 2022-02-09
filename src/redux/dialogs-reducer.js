@@ -23,7 +23,13 @@ let initialState = {
     newMessageText: 'Write ur text here!',
 }
 
+<<<<<<< HEAD:src/redux/dialogs-reducer.js
 const dialogsReducer = (state = initialState, action) => {
+=======
+export type InitialStateType = typeof initialState
+
+const dialogsReducer = (state = initialState, action:any): InitialStateType => {
+>>>>>>> parent of 50d0628 (Merge branch 'main' of https://github.com/kolomyaka1/React-Network):src/redux/dialogs-reducer.ts
     
     switch (action.type) {
         case ADD_MESSAGE: {

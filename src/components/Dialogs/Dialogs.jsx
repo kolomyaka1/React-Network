@@ -53,6 +53,10 @@ let Dialogs = (props) => {
                     className={s.dialogs__add} 
                     ref={ newDialogElement }
                     value={props.newMessageText}
+<<<<<<< HEAD:src/components/Dialogs/Dialogs.jsx
+=======
+                    placeholder='Сообщение'
+>>>>>>> parent of 50d0628 (Merge branch 'main' of https://github.com/kolomyaka1/React-Network):src/components/Dialogs/Dialogs.tsx
                     />
                     <button onClick={ addMessage }>Send</button>
                 </div>
