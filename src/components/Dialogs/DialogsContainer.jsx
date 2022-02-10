@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addMessageActionCreator, updateNewMessageTextActionCreator } from '../../redux/dialogs-reducer';
+import { actions } from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
 import { AuthRedirect } from '../../HOC/AuthReducer';
 
@@ -15,10 +15,10 @@ let mapStateToProps = (state) => {  //  Передаем данные из ст�
 let mapDispatchToProps = (dispatch) => {  // В диспатч передаем вызов функции экшн-кр
     return {
         onMessageChange : (text) => {
-            dispatch(updateNewMessageTextActionCreator(text));
+            dispatch(actions.updateNewMessageTextActionCreator(text));
         },
         addMessage : () => {
-            dispatch(addMessageActionCreator()); 
+            dispatch(actions.addMessageActionCreator()); 
         }
     }
 }

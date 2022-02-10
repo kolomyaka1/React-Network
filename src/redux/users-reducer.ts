@@ -1,6 +1,8 @@
 
+import { Dispatch } from "react";
 import { usersAPI } from "../components/API/users-api";
 import { UserType } from "../types/types";
+import { AppStateType, BaseThunkType, InferActionTypes } from "./redux-store";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -9,7 +11,6 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TO_TOTAL_USERS_COUNT = 'SET_TO_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const TOGGLE_IS_FOLLOWING = 'TOGGLE_IS_FOLLOWING';
-
 
 
 
@@ -25,7 +26,7 @@ let initialState = {
 
 export type InitialStateType = typeof initialState
 
-const usersReducer = (state = initialState, action: any): InitialStateType => {
+const usersReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -79,100 +80,44 @@ const usersReducer = (state = initialState, action: any): InitialStateType => {
 
 }
 
+type ThunkType = BaseThunkType<ActionsTypes>
 
-type followSuccessType = {
-    type: typeof FOLLOW
-    userID: number
+type ActionsTypes = InferActionTypes<typeof actions>
+
+export const actions = {
+    followSuccess : (userID: number) => ({type: FOLLOW, userID} as const),
+    unfollowSuccess : (userID: number) => ({ type: UNFOLLOW, userID } as const),
+    setUsers : (users: Array<UserType>) => ({ type: SET_USERS, users } as const),
+    setCurrentPage : (currentPage: number) => ({ type: SET_CURRENT_PAGE, currentPage } as const),
+    setToTotalUsersCount : (totalCount: number) => ({ type: SET_TO_TOTAL_USERS_COUNT, totalCount } as const),
+    toggleIsFetching : (isFetching: boolean) => ({ type: TOGGLE_IS_FETCHING, isFetching } as const), // Переменная, которая вкл/выкл Loader
+    toggleIsFollowing : (isFetching: boolean) => ({ type: TOGGLE_IS_FOLLOWING, isFetching } as const)
 }
-export const followSuccess = (userID: number): followSuccessType => ({
-    type: FOLLOW,
-    userID
-})
 
 
-type unfollowSuccessType = {
-    type: typeof UNFOLLOW
-    userID: number
-}
-export const unfollowSuccess = (userID: number): unfollowSuccessType => ({
-    type: UNFOLLOW,
-    userID
-})
-
-
-type setUsersType = {
-    type: typeof SET_USERS
-    users: Array<UserType>
-}
-export const setUsers = (users: Array<UserType>): setUsersType => ({
-    type: SET_USERS,
-    users
-})
-
-
-type setCurrentPageType = {
-    type: typeof SET_CURRENT_PAGE
-    currentPage: number
-}
-export const setCurrentPage = (currentPage: number): setCurrentPageType => ({
-    type: SET_CURRENT_PAGE,
-    currentPage
-})
-
-
-type setToTotalUsersCountType = {
-    type: typeof SET_TO_TOTAL_USERS_COUNT
-    totalCount: number
-}
-export const setToTotalUsersCount = (totalCount: number): setToTotalUsersCountType => ({
-    type: SET_TO_TOTAL_USERS_COUNT,
-    totalCount
-})
-
-
-type toggleIsFetchingType = {
-    type: typeof TOGGLE_IS_FETCHING
-    isFetching: boolean
-}
-export const toggleIsFetching = (isFetching: boolean): toggleIsFetchingType => ({  // Переменная, которая вкл/выкл Loader
-    type: TOGGLE_IS_FETCHING,
-    isFetching
-})
-
-
-type toggleIsFollowingType = {
-    type: typeof TOGGLE_IS_FOLLOWING
-    isFetching: boolean
-}
-export const toggleIsFollowing = (isFetching: boolean): toggleIsFollowingType => ({
-    type: TOGGLE_IS_FOLLOWING,
-    isFetching
-})
-
-
-export const getUsersThunkCreator = (currentPage: number, pageSize: number) => async (dispatch: any) => {
-    dispatch(toggleIsFetching(true))  // Включаем Loader
+export const getUsersThunkCreator = (currentPage: number, pageSize: number): ThunkType => async (dispatch) => {
+    dispatch(actions.toggleIsFetching(true))  // Включаем Loader
     let promise = await usersAPI.getUsers(currentPage, pageSize); // Создаем функцию thunk и убираем ее из UI и передаем в BLL
     // Прячем наш запрос в отдельный файл, для того чтобы наша компонента не выполняла запросы на сервер
-    dispatch(toggleIsFetching(false));  // После получения запроса от сервера отключаем Loader
-    dispatch(setUsers(promise.items)); // Загружаем пользователей
-    dispatch(setToTotalUsersCount(promise.totalCount)); // Устанавливаем общ. кол-во пользователей
-    dispatch(setCurrentPage(currentPage));  // Функция для переключения страницы 
+    dispatch(actions.toggleIsFetching(false));  // После получения запроса от сервера отключаем Loader
+    dispatch(actions.setUsers(promise.items)); // Загружаем пользователей
+    dispatch(actions.setToTotalUsersCount(promise.totalCount)); // Устанавливаем общ. кол-во пользователей
+    dispatch(actions.setCurrentPage(currentPage));  // Функция для переключения страницы 
 };
 
 
 
-export const follow = (id: number) => async (dispatch: any) => {
+export const follow = (id: number):ThunkType => async (dispatch) => {  // Thunk для подписки на пользователя
     let promise = await usersAPI.followUser(id)
     if (promise.resultCode === 0) {
-        dispatch(followSuccess(id));  // Передаем информацию о подписке на пользователя
+        dispatch(actions.followSuccess(id));  // Передаем информацию о подписке на пользователя
     }
 };
 
-export const unfollow = (id: number) => async (dispatch: any) => {
+export const unfollow = (id: number): ThunkType => async (dispatch) => {  // Thunk Для отписки от пользователя
     let promise = await usersAPI.unfollowUser(id)
     if (promise.resultCode === 0) {
-        dispatch(unfollowSuccess(id));  // Передаем информацию об отписке от пользователя
+        dispatch(actions.unfollowSuccess(id));  // Передаем информацию об отписке от пользователя
     }
 };
 

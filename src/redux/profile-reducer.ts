@@ -1,7 +1,7 @@
 import { PhotosType } from './../types/types';
 import { profileAPI } from './../components/API/profile-api';
-import { usersAPI } from "../components/API/users-api";
 import { PostType, ProfileType } from "../types/types";
+import { BaseThunkType, InferActionTypes } from './redux-store';
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
@@ -48,7 +48,7 @@ let initialState = {
 
 export type InitialStateType = typeof initialState
 
-const profileReducer = (state = initialState, action:any): InitialStateType => {
+const profileReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case ADD_POST: {
             let newPost = {
@@ -129,109 +129,42 @@ const profileReducer = (state = initialState, action:any): InitialStateType => {
 
 }
 
-
-
-type addPostActionCreatorType = {
-    type : typeof ADD_POST
+export const actions = {   // Указываем наши actions в объект для типизации
+    addPostActionCreator : () => ({ type: ADD_POST } as const),
+    updateNewPostTextActionCreator : (text:string) => ({ type: UPDATE_NEW_POST_TEXT, text } as const),
+    setUserProfile : (profile:ProfileType) => ({ type: SET_USER_PROFILE, profile } as const),
+    setUserStatus : (status:string) => ({ type: SET_USER_STATUS, status } as const),
+    deletePost : (id:number) => ({ type: DELETE_POST, id } as const),
+    savePhotoSuccess : (photos:PhotosType) => ({ type: SAVE_PHOTO_SUCCESS, photos } as const),
+    likePost : (id:number) => ({ type: LIKE_POST, id } as const),
+    dislikePost : (id:number) => ({ type: DISLIKE_POST, id } as const),
 }
-export const addPostActionCreator = (): addPostActionCreatorType => ({
-    type: ADD_POST
-})
+
+type ActionsTypes = InferActionTypes<typeof actions> // Создаем типизацию для actions
+type ThunkType = BaseThunkType<ActionsTypes>  // Создаем типизацию для thunk
 
 
-type updateNewPostTextActionCreatorType = {
-    type : typeof UPDATE_NEW_POST_TEXT
-    text : string
-}
-export const updateNewPostTextActionCreator = (text:string): updateNewPostTextActionCreatorType => ({
-    type: UPDATE_NEW_POST_TEXT,
-    text
-})
-
-
-type setUserProfileType = {
-    type : typeof SET_USER_PROFILE
-    profile : ProfileType
-}
-export const setUserProfile = (profile:ProfileType):setUserProfileType => ({
-    type: SET_USER_PROFILE,
-    profile
-})
-
-
-type setUserStatusType = {
-    type : typeof SET_USER_STATUS
-    status : string
-}
-export const setUserStatus = (status:string): setUserStatusType => ({
-    type: SET_USER_STATUS,
-    status
-})
-
-
-type deletePostType = {
-    type : typeof DELETE_POST
-    id : number
-}
-export const deletePost = (id:number): deletePostType => ({
-    type: DELETE_POST,
-    id
-})
-
-
-type savePhotoSuccessType = {
-    type : typeof SAVE_PHOTO_SUCCESS
-    photos : PhotosType
-}
-export const savePhotoSuccess = (photos:PhotosType): savePhotoSuccessType => ({
-    type: SAVE_PHOTO_SUCCESS,
-    photos
-})
-
-
-type likePostType = {
-    type : typeof LIKE_POST
-    id : number
-}
-export const likePost = (id:number): likePostType => ({
-    type: LIKE_POST,
-    id
-})
-
-
-type dislikePostType = {
-    type : typeof DISLIKE_POST
-    id : number
-}
-export const dislikePost = (id:number): dislikePostType => ({
-    type: DISLIKE_POST,
-    id
-})
-
-
-export const getProfile = (id:number) => async (dispatch:any) => {
+export const getProfile = (id:number): ThunkType => async (dispatch) => {  // Thunk для загрузки профиля
     let promise = await profileAPI.getProfile(id)
-    dispatch(setUserProfile(promise))
+    dispatch(actions.setUserProfile(promise))
 }
 
-export const getUserStatus = (userId:number) => async (dispatch:any) => {
+export const getUserStatus = (userId:number): ThunkType => async (dispatch) => { // thunk для получения статуса в зависимости от загруженного пользователя
     let promise = await profileAPI.getStatus(userId)
-    dispatch(setUserStatus(promise.data))            
+    dispatch(actions.setUserStatus(promise.data))            
 }
 
-
-export const updateUserStatus = (status:string) => async (dispatch:any) => {
+export const updateUserStatus = (status:string): ThunkType => async (dispatch) => {  // thunk для обновления статуса в профиле
     let response = await profileAPI.updateStatus(status);
     if (response.data.resultCode === 0) {
-        dispatch(setUserStatus(status))
+        dispatch(actions.setUserStatus(status))
     }
 }
 
-
-export const savePhoto = (photos:string) => async (dispatch:any) => {   // thunk для сохранения фото(ава) в профиле
+export const savePhoto = (photos:string): ThunkType => async (dispatch) => {   // thunk для сохранения фото(ава) в профиле
     let response = await profileAPI.updatePhoto(photos);
     if (response.resultCode === 0) {
-        dispatch(savePhotoSuccess(response.data.photos))
+        dispatch(actions.savePhotoSuccess(response.data.photos))
     }
 }
 

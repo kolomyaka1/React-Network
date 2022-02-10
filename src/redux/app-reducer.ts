@@ -1,17 +1,18 @@
 import { getAuthUser } from './auth-reducer'
+import { InferActionTypes } from './redux-store';
 
 const SET_INITIALIZED = 'SET_INITIALIZED';
 
-export type InitialStateType = {
-    initialized : boolean
-}
 
-
-let initialState : InitialStateType = {  // Указываем какие данные нам приходят от сервера
+let initialState = {  // Указываем какие данные нам приходят от сервера
     initialized : false,
 }
 
-const appReducer = (state = initialState, action:any): InitialStateType => {
+export type InitialStateType = typeof initialState
+type ActionsType = InferActionTypes<typeof actions>
+
+
+const appReducer = (state = initialState, action:ActionsType): InitialStateType => {
     switch (action.type) {
         case SET_INITIALIZED : 
         return {
@@ -21,19 +22,19 @@ const appReducer = (state = initialState, action:any): InitialStateType => {
         default:
             return state;
     }
-
 }
 
-type initializedSuccesActionType = {
-    type : typeof SET_INITIALIZED
-} 
 
-export const initializedSuccess = (): initializedSuccesActionType => ({ type : SET_INITIALIZED });
+export const actions = {
+    initializedSuccess : () => ({ type : SET_INITIALIZED })
+    
+}
+
 
 export const initializeApp = () => (dispatch:any) => {
      let promise = dispatch(getAuthUser());  // Запрос асинхронный
      promise.then(() => {
-        dispatch(initializedSuccess())
+        dispatch(actions.initializedSuccess())
      });
 }
 

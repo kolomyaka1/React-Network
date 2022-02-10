@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { follow, unfollow, toggleIsFollowing } from '../../redux/users-reducer';
+import { follow, unfollow } from '../../redux/users-reducer';
 import React from 'react';
 import Users from './Users.jsx';
 import Loader from '../preloader/loader.js';
@@ -56,6 +56,5 @@ let mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     follow,
     unfollow,
-    toggleIsFollowing,
     getUsersThunkCreator,
 })(UsersAPIComponent);
