@@ -1,6 +1,5 @@
-import { Dispatch } from 'react';
 import { authAPI } from '../components/API/auth-api';
-import { AppStateType, BaseThunkType, InferActionTypes } from './redux-store';
+import { BaseThunkType, InferActionTypes } from './redux-store';
 
 const SET_USER_DATA = 'SET_USER_DATA';
 const SET_CAPTCHA = 'SET_CAPTCHA';
@@ -34,8 +33,6 @@ const authReducer = (state = initialState, action: ActionsTypes): InitialStateTy
 
 }
 
-type GetStateType = () => AppStateType
-type DispatchType = Dispatch<ActionsTypes>
 type ThunkType = BaseThunkType<ActionsTypes>
 
 

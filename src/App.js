@@ -11,12 +11,6 @@ import Profile from './components/Profile/Profile';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginContainer from './components/Login/LoginContainer';
 
-import { connect } from 'react-redux';
-import { initializeApp } from './redux/app-reducer'
-import Loader from './components/preloader/loader';
-
-
-
 
 function App(props) {
   return (  // Оборачиваем в тег Browser для того, чтобы наш сайт смог прочитать актуальный URL и отрисовать нужный нам контент

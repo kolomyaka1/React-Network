@@ -1,10 +1,11 @@
 import { connect } from 'react-redux';
 import { actions } from '../../redux/dialogs-reducer';
 import Dialogs from './Dialogs';
-import { AuthRedirect } from '../../HOC/AuthReducer';
+import { AuthRedirect } from '../../HOC/AuthRedirect';
+import { AppStateType } from '../../redux/redux-store';
 
 
-let mapStateToProps = (state) => {  //  Передаем данные из стейта в функциональную компоненту
+let mapStateToProps = (state: AppStateType) => {  //  Передаем данные из стейта в функциональную компоненту
     return {
         dialogsPage : state.dialogsPage,
         newMessageText : state.dialogsPage.newMessageText,
@@ -12,9 +13,9 @@ let mapStateToProps = (state) => {  //  Передаем данные из ст�
     }
 }
 
-let mapDispatchToProps = (dispatch) => {  // В диспатч передаем вызов функции экшн-кр
+let mapDispatchToProps = (dispatch: any) => {  // В диспатч передаем вызов функции экшн-кр
     return {
-        onMessageChange : (text) => {
+        onMessageChange : (text: string) => {
             dispatch(actions.updateNewMessageTextActionCreator(text));
         },
         addMessage : () => {

@@ -3,10 +3,12 @@ import DialogItem from './DialogItem/DialogItem';
 import s from './../Dialogs/Dialogs.module.css';
 import Message from './Message/Message';
 
+type OwnPropsType = {
+    
+}
 
 
-
-let Dialogs = (props) => {
+let Dialogs: React.FC<> = (props) => {
     
     let DialogsElements = props.dialogsPage.dialogsData.map(dialog =>
         (<DialogItem name={dialog.name} id={dialog.id} />)

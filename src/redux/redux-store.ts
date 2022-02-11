@@ -20,11 +20,9 @@ let reducers = combineReducers({profilePage : profileReducer,
 
 
 type ReducerType = typeof reducers; // (globalstate : AppStateType) => AppStateType 
+
 export type AppStateType = ReturnType<ReducerType>
-
-type PropertiesTypes<T> = T extends {[key : string]: infer U} ? U : never
-export type InferActionTypes<T extends {[key: string]: (...args:any[])=>any}> = ReturnType<PropertiesTypes<T>>
-
+export type InferActionTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U} ? U : never
 export type BaseThunkType<A extends Action = Action,R = Promise<void>> = ThunkAction<R, AppStateType, unknown, A>
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));

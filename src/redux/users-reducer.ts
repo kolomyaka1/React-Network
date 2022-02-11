@@ -1,8 +1,6 @@
-
-import { Dispatch } from "react";
 import { usersAPI } from "../components/API/users-api";
 import { UserType } from "../types/types";
-import { AppStateType, BaseThunkType, InferActionTypes } from "./redux-store";
+import { BaseThunkType, InferActionTypes } from "./redux-store";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
@@ -81,7 +79,6 @@ const usersReducer = (state = initialState, action: ActionsTypes): InitialStateT
 }
 
 type ThunkType = BaseThunkType<ActionsTypes>
-
 type ActionsTypes = InferActionTypes<typeof actions>
 
 export const actions = {
