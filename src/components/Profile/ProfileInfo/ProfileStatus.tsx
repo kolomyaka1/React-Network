@@ -1,12 +1,23 @@
 import React from 'react';
+import { AppStateType } from '../../../redux/redux-store';
 
-class ProfileStatus extends React.Component {
+type OwnPropsType = {
+    status : string
+
+    updateUserStatus : (status: string) => void
+}
+
+type InputEvent = React.ChangeEvent<HTMLInputElement>
+
+class ProfileStatus extends React.Component<OwnPropsType> {
 
     state = {
         editMode : false,
         status : this.props.status,
     }
 
+
+    
     activateEditMode = () => {
         this.setState({    //  setState - Асинхронный!!! Знач. editMode будет изменено после выхода из метода.
             editMode : true
@@ -20,13 +31,15 @@ class ProfileStatus extends React.Component {
         this.props.updateUserStatus(this.state.status);
     }
 
-    onStatusChange = (e) => {
+    onStatusChange = (e : InputEvent) => {
+        if (e.target.value) {
         this.setState({
-            status : e.currentTarget.value, 
+            status : e.target.value, 
         });
     }
+    }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps: OwnPropsType, prevState: AppStateType) {
         
         if (prevProps.status !== this.props.status) {
             this.setState({

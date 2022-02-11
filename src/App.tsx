@@ -10,14 +10,15 @@ import UsersContainer from './components/Users/UsersContainer';
 import Profile from './components/Profile/Profile';
 import HeaderContainer from './components/Header/HeaderContainer';
 import LoginContainer from './components/Login/LoginContainer';
+import NavContainer from './components/Nav/NavContainer';
 
 
-function App(props) {
+const App: React.FC = () => {
   return (  // Оборачиваем в тег Browser для того, чтобы наш сайт смог прочитать актуальный URL и отрисовать нужный нам контент
     <BrowserRouter>
       <div className='wrapper'>
         <HeaderContainer />
-        <Nav state={props.state.sidebar} />
+        <NavContainer />
         <div className='wrapper__content'>
           <Routes >
             <Route path='/Profile'
@@ -28,7 +29,6 @@ function App(props) {
             />
             <Route path='/Dialogs/*'
               element={<DialogsContainer
-                store={props.store}
               />}
             />
             <Route path='/Users'

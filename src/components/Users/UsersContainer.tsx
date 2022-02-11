@@ -2,16 +2,34 @@ import { connect } from 'react-redux';
 import { follow, unfollow } from '../../redux/users-reducer';
 import React from 'react';
 import Users from './Users.jsx';
-import Loader from '../preloader/loader.js';
+import Loader from '../preloader/loader';
 import {Navigate} from 'react-router-dom'
 import { getUsersThunkCreator } from '../../redux/users-reducer';
-class UsersAPIComponent extends React.Component {
+import { AppStateType } from '../../redux/redux-store';
+import { UserType } from '../../types/types';
+
+
+
+type OwnPropsType = {
+    users : Array<UserType>
+    currentPage : number
+    pageSize : number
+    isAuth : boolean
+    isFetching : boolean
+    totalUsersCount : number
+    followed : boolean
+    follow : (id: number) => void
+    unfollow : (id: number) => void
+    getUsersThunkCreator : (currentPage : number, pageNumber? : number, pageSize? : number) => void
+}
+
+class UsersAPIComponent extends React.Component<OwnPropsType, AppStateType> {
 
     componentDidMount() {
         this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize);
     }
 
-    onPageChanged = (pageNumber) => {
+    onPageChanged = (pageNumber:number) => {
         this.props.getUsersThunkCreator(pageNumber);
     }
 
@@ -30,9 +48,8 @@ class UsersAPIComponent extends React.Component {
                     users={this.props.users}
                     unfollow={this.props.unfollow}
                     follow={this.props.follow}
-                    toggleIsFollowing={this.props.toggleIsFollowing}
-                    isFollowing={this.props.isFollowing}
                     isAuth={this.props.isAuth}
+                    
                 />}
 
         </>
@@ -40,15 +57,16 @@ class UsersAPIComponent extends React.Component {
 
 }
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
         totalUsersCount: state.usersPage.totalUsersCount,
         currentPage: state.usersPage.currentPage,
         isFetching: state.usersPage.isFetching,
-        isFollowing : state.usersPage.isFollowing,
+        followed : state.usersPage.followed,
         isAuth : state.auth.isAuth,
+        
     }
 }
 
@@ -57,4 +75,5 @@ export default connect(mapStateToProps, {
     follow,
     unfollow,
     getUsersThunkCreator,
+    // @ts-ignore
 })(UsersAPIComponent);

@@ -55,7 +55,7 @@ export const getAuthUser = (): ThunkType => async (dispatch) => {
 
 export const getCaptcha = (): ThunkType => async (dispatch) => {
     let response = await authAPI.getCaptcha();
-    dispatch(actions.setCaptcha(response.url))
+dispatch(actions.setCaptcha(response.url))
 }
 
 

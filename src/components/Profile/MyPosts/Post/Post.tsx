@@ -2,25 +2,46 @@ import s from './Post.module.css';
 import successLike from '../../../../img/successLike.png'
 import emptyLike from '../../../../img/emptyLike.png'
 import close from '../../../../img/close.png'
+import { PostType, ProfileType } from '../../../../types/types';
+import Loader from '../../../preloader/loader';
 
-let Post = (props) => {
-    const deletePost = (id) => {
+type OwnPropsType = {
+    likesCounter : number
+    key : number
+    id : number
+    login : string | null
+    message : string
+    profile : ProfileType | null
+    isLiked : boolean    
+    deletePost : (id:number) => void
+    likePost : (id:number) => void
+    dislikePost : (id:number) => void
+}
+
+let Post = (props:OwnPropsType) => {
+    const deletePost = (id: number) => {
         props.deletePost(id);
     }
 
-    const likePost = (id) => {
+    const likePost = (id: number) => {
         props.likePost(id);
     }
 
-    const dislikePost = (id) => {
+    const dislikePost = (id: number) => {
         props.dislikePost(id);
     }
 
+
+    if (!props.profile) {
+        return <Loader />
+    }
+    
     return (
         <div>
             <div className={s.post__wrapper}>
                 <div className={s.item}>
-                <img alt='ava' src={props.profile.photos.small ? props.profile.photos.small : 'https://html5css.ru/howto/img_avatar.png'} />
+                {/*  @ts-ignore */}
+                <img alt='ava' src={props.profile.photos ? props.profile.photos.small : 'https://html5css.ru/howto/img_avatar.png'} />
                     <div className={s.post__item__description}>
                         <span className={s.post__login}>{props.profile.fullName}</span>
                         <span className={s.message}>{props.message}</span>
@@ -40,6 +61,7 @@ let Post = (props) => {
 
             </div>
         </div>
+    
     )
 }
 

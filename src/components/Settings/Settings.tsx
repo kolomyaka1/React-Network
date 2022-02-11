@@ -1,6 +1,6 @@
 
 
-let Settings = (props) => {
+let Settings = () => {
     return (
         <div>
             Settings

@@ -18,7 +18,6 @@ let initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
-    isFollowing: false,
     followed: false
 };
 
@@ -68,10 +67,6 @@ const usersReducer = (state = initialState, action: ActionsTypes): InitialStateT
             return {
                 ...state, isFetching: action.isFetching
             }
-        case TOGGLE_IS_FOLLOWING:
-            return {
-                ...state, isFollowing: action.isFetching
-            }
         default:
             return state;
     }
@@ -88,7 +83,6 @@ export const actions = {
     setCurrentPage : (currentPage: number) => ({ type: SET_CURRENT_PAGE, currentPage } as const),
     setToTotalUsersCount : (totalCount: number) => ({ type: SET_TO_TOTAL_USERS_COUNT, totalCount } as const),
     toggleIsFetching : (isFetching: boolean) => ({ type: TOGGLE_IS_FETCHING, isFetching } as const), // Переменная, которая вкл/выкл Loader
-    toggleIsFollowing : (isFetching: boolean) => ({ type: TOGGLE_IS_FOLLOWING, isFetching } as const)
 }
 
 

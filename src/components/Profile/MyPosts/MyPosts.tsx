@@ -1,4 +1,6 @@
 import React, { FC } from 'react';
+import { useSelector } from 'react-redux';
+import { AppStateType } from '../../../redux/redux-store';
 import { PostType, ProfileType } from '../../../types/types';
 import Loader from '../../preloader/loader';
 import s from './MyPosts.module.css';
@@ -6,7 +8,6 @@ import Post from './Post/Post';
 
 
 type PropsType = {
-    posts : Array<PostType>
     newPostText : string
     login : string | null
     profile : ProfileType | null
@@ -19,14 +20,15 @@ type PropsType = {
 
 
 let MyPosts: FC<PropsType> = (props) => { // С помощью функции maps отрисовываем каждый элемент из props.state в созданную нами компоненту 
+    const posts = useSelector<AppStateType, Array<PostType>>(state => state.profilePage.postsData)
     
     if (!props.profile) {
         return <Loader />
     }
-    let postsElements = props.posts.map((el) => <Post login={props.login}
+    
+    let postsElements = posts.map((el) => <Post login={props.login}
         message={el.message}
         likesCounter={el.likesCounter}
-        posts={props.posts}
         deletePost={props.deletePost}
         key={el.id}
         profile={props.profile}

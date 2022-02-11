@@ -3,9 +3,21 @@ import ProfileInfo from './ProfileInfo';
 import { connect } from 'react-redux';
 import React from 'react';
 import { getProfile, getUserStatus, updateUserStatus } from '../../../redux/profile-reducer'
+import { AppStateType } from '../../../redux/redux-store';
+import { ProfileType } from '../../../types/types';
 
 
-class ProfileInfoContainer extends React.Component {
+type OwnPropsType = {
+    match : any
+    profile : ProfileType | null
+    status : string
+    getProfile : (userId: number) => void
+    getUserStatus : (userId: number) => void
+    updateUserStatus : (status : string) => void
+}
+
+
+class ProfileInfoContainer extends React.Component<OwnPropsType, AppStateType> {
 
     componentDidMount() {
         let userId = this.props.match ? this.props.match.params.userId : '21430';
@@ -16,7 +28,10 @@ class ProfileInfoContainer extends React.Component {
 
     render() {
         return (
-            <ProfileInfo {...this.props} profile={this.props.profile}  status={this.props.status} />
+            <ProfileInfo profile={this.props.profile}  
+            status={this.props.status}
+            updateUserStatus={this.props.updateUserStatus}
+            />
         )
     }
 }
@@ -24,11 +39,10 @@ class ProfileInfoContainer extends React.Component {
 
 let AuthRedirectComponent = AuthRedirect(ProfileInfoContainer);
 
-let mapStateToProps = (state) => ({
+let mapStateToProps = (state: AppStateType) => ({
     profile : state.profilePage.profile,
     status : state.profilePage.status,
     isAuth : state.auth.isAuth,
-    
 })
 
 

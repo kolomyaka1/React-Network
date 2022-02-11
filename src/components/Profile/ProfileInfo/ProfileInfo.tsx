@@ -1,8 +1,15 @@
 import s from './ProfileInfo.module.css';
 import Loader from '../../preloader/loader';
 import ProfileStatus from './ProfileStatus'
+import { ProfileType } from '../../../types/types';
 
-let ProfileInfo = (props) => {
+type OwnPropsType = {
+    profile : ProfileType | null
+    status : string
+    updateUserStatus : (status: string) => void
+}
+
+let ProfileInfo = (props:OwnPropsType) => {
     
     if (!props.profile) {
         return <Loader />

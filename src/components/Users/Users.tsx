@@ -1,10 +1,20 @@
 import React from 'react';
 import s from './users.module.css';
 import {NavLink} from 'react-router-dom';
+import { UserType } from '../../types/types';
 
+type OwnPropsType = {
+    users : Array<UserType>
+    totalUsersCount : number
+    pageSize : number
+    currentPage : number
+    isAuth : boolean
+    onPageChanged : (page: number) => void
+    unfollow : (id: number) => void
+    follow : (id: number) => void
+}
 
-
-let Users = (props) => {
+let Users = (props: OwnPropsType) => {
     
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
@@ -18,6 +28,7 @@ let Users = (props) => {
     return <div>
         <div className={s.page__wrapper}>
             {pages.map(p => {
+                // @ts-ignore
                 return <span className={props.currentPage === p && s.selectedPage} onClick={(e) => { props.onPageChanged(p) }}>{p}</span>
             })}
         </div>

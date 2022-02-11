@@ -1,31 +1,32 @@
 import MyPosts from "./MyPosts";
 import { actions } from '../../../redux/profile-reducer'
 import { connect } from "react-redux";
+import { AppStateType } from "../../../redux/redux-store";
 
 
-let mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType) => {
     return {
-        posts : state.profilePage.postsData,
         newPostText : state.profilePage.newPostText,
-        profile : state.profilePage.profile
+        profile : state.profilePage.profile,
+        login : state.auth.login
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
+let mapDispatchToProps = (dispatch:any) => {
     return {
-        updateNewPostText : (text) => {
+        updateNewPostText : (text:string) => {
             dispatch(actions.updateNewPostTextActionCreator(text))
         },
         addPost : () => {
             dispatch(actions.addPostActionCreator())
         },
-        likePost : (id) => {
+        likePost : (id:number) => {
             dispatch(actions.likePost(id))
         },
-        dislikePost : (id) => {
+        dislikePost : (id:number) => {
             dispatch(actions.dislikePost(id))
         },
-        deletePost : (id) => {
+        deletePost : (id:number) => {
             dispatch(actions.deletePost(id))
         }
     }

@@ -7,7 +7,8 @@ import { AppStateType } from '../../redux/redux-store';
 
 let mapStateToProps = (state: AppStateType) => {  //  Передаем данные из стейта в функциональную компоненту
     return {
-        dialogsPage : state.dialogsPage,
+        dialogsData : state.dialogsPage.dialogsData,
+        messageData : state.dialogsPage.messageData,
         newMessageText : state.dialogsPage.newMessageText,
         isAuth : state.auth.isAuth,
     }

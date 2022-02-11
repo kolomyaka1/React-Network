@@ -1,6 +1,6 @@
 // import s from './News.module.css';
 
-let News = (props) => {
+let News = () => {
     return (
         <div>
             News
