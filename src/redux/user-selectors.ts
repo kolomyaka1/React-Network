@@ -34,10 +34,6 @@ export const getIsFetching = (state: AppStateType) => {
     return state.usersPage.isFetching;
 }
 
-export const getIsFollowing = (state: AppStateType) => {
-    return state.usersPage.isFollowing;
-}
-
 export const getIsAuth = (state: AppStateType) => {
     return state.auth.isAuth
 }

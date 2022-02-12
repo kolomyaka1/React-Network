@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { follow, unfollow } from '../../redux/users-reducer';
 import React from 'react';
-import Users from './Users.jsx';
+import Users from './Users';
 import Loader from '../preloader/loader';
 import {Navigate} from 'react-router-dom'
 import { getUsersThunkCreator } from '../../redux/users-reducer';
@@ -66,7 +66,6 @@ let mapStateToProps = (state: AppStateType) => {
         isFetching: state.usersPage.isFetching,
         followed : state.usersPage.followed,
         isAuth : state.auth.isAuth,
-        
     }
 }
 

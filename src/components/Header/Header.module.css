@@ -21,8 +21,18 @@
     color: white;
     font-size: 21px;
     font-weight: bold;
+    margin-right: 10px;
 }
 
-.login__link {
-    display: inline;
+.login__auth {
+    display: flex;
+    align-items: center;
+}
+
+.login__auth input {
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 50%;
 }
