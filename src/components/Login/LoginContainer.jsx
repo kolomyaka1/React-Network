@@ -91,13 +91,13 @@ const SignupForm = (props) => {
                                 type='password'
                             />
                         </div>
-                        <img src={props.captcha}></img><br />
+                        {/* <img src={props.captcha}></img><br />
                         <MyCaptcha
                             name="captcha"
                             label='captcha'
-                        />
+                        /> */}
 
-                        <button type="submit">Отправить</button>
+                        
                         {/* <div className={s.login__captcha}>
                                 <img src={props.captcha} alt="captcha" />
                                 <input type="text" name='captcha' placeholder='Текст с картинки'/>
@@ -105,16 +105,13 @@ const SignupForm = (props) => {
                         </div> */}
 
 
-                        {/* {props.captcha
+                        {props.captcha
                             ? <div className={s.login__captcha}>
                                 <img src={props.captcha} alt="captcha" />
-                                <input type="text" name='captcha' placeholder='Текст с картинки'/>
-                                <button type="submit">Отправить</button>
-                            </div>
-                            : <div className={s.login__button}>
-                                <button className={s.login__buton1} type="submit" >Отправить</button>
-                            </div>
-                        } */}
+                                <MyCaptcha name="captcha" label='captcha' />                            </div>
+                            : ''
+                        }
+                        <button type="submit">Отправить</button>
                     </Form>
                 )}
             </Formik>
