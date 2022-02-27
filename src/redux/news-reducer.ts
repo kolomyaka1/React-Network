@@ -1,12 +1,13 @@
 import { newsAPI } from "../components/API/news-api";
-import { NewsType } from "../types/types";
+import { NewsItemType } from "../types/types";
+
 
 
 const GET_NEWS = 'GET-NEWS';
 
 
 let initialState = {
-    newsData: [] as Array<NewsType>,
+    newsData: [] as Array<NewsItemType>,
 }
 
 export type InitialStateType = typeof initialState
@@ -25,18 +26,16 @@ const newsReducer = (state = initialState, action:any):InitialStateType => {
     }
 }
 
-type getNewsSuccessType = {
-    type : typeof GET_NEWS
-    newsData : Array<NewsType>
-}
 
-export const getNewsSuccess = (newsData : Array<NewsType>): getNewsSuccessType => ({
+
+export const getNewsSuccess = (newsData : Array<NewsItemType>) => ({
     type : GET_NEWS,
     newsData
 })
 
 export const getNews = () => async (dispatch: any) => {
     let promise = await newsAPI.getNews();
+    console.log(promise);
     
     dispatch(getNewsSuccess(promise.articles));
     

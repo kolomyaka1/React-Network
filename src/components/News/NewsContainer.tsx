@@ -2,12 +2,13 @@ import React from "react";
 import { connect } from "react-redux";
 import { getNews } from "../../redux/news-reducer";
 import { AppStateType } from "../../redux/redux-store";
-import { NewsType } from "../../types/types";
+import { NewsItemType } from "../../types/types";
+
 import News from "./News";
 
 
 type MapStateToPropsType = {
-    newsData : Array<NewsType>
+    newsData : Array<NewsItemType>
 }
 
 

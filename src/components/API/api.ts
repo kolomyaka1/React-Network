@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { UserType } from '../../types/types';
+import { NewsItemType, UserType } from '../../types/types';
 
 export const instance = axios.create({
     withCredentials: true,
@@ -22,6 +22,12 @@ export type GetItemsType = {
     items : Array<UserType>
     totalCount : number
     error : string | null
+}
+
+export type getNewsType = {
+    status : string
+    totalResults : number
+    articles : Array<NewsItemType>
 }
 
 export enum ResultCodesEnum  {

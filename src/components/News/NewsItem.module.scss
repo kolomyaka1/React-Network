@@ -1,0 +1,44 @@
+.wrapper {
+}
+
+.news__item {
+  &_img {
+    & img {
+      width: 400px;
+      height: 200px;
+      object-fit: cover;
+      padding-top: 5px;
+    }
+  }
+  &_block {
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+  }
+  &_wrapper {
+    margin: 20px;
+  }
+  &_title {
+    margin-bottom: 15px;
+  }
+  &_description {
+  }
+  &_text {
+    display: flex;
+    padding-left: 25px;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &_content {
+    display: flex;
+  }
+  &_footer {
+    text-align: end;
+    & span {
+      padding: 5px;
+    }
+    &_link {
+      text-align: left;
+    }
+  }
+}

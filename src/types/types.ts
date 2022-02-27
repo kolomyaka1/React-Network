@@ -63,6 +63,12 @@ export type FriendNameType = {
     name : string
 }
 
-export type NewsType = {
-    id : number
+export type NewsItemType = {
+    author : string | null
+    content: string
+    description : string
+    url: string
+    urlToImage : string
+    publishedAt : string
+    title : string
 }
