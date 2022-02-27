@@ -21,6 +21,7 @@ const App: React.FC = () => {
         <NavContainer />
         <div className='wrapper__content'>
           <Routes >
+            <Route path='/' element={<Profile />} />
             <Route path='/Profile'
               element={<Profile />}  // Добавляем нужные функции и данные через props из state
             />

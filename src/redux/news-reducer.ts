@@ -37,9 +37,9 @@ export const getNewsSuccess = (newsData : Array<NewsType>): getNewsSuccessType =
 
 export const getNews = () => async (dispatch: any) => {
     let promise = await newsAPI.getNews();
-    debugger
-    dispatch(getNewsSuccess);
-    console.log(promise);
+    
+    dispatch(getNewsSuccess(promise.articles));
+    
     
 }
 
