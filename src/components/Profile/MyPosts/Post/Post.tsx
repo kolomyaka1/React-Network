@@ -2,7 +2,7 @@ import s from './Post.module.css';
 import successLike from '../../../../img/successLike.png'
 import emptyLike from '../../../../img/emptyLike.png'
 import close from '../../../../img/close.png'
-import { PostType, ProfileType } from '../../../../types/types';
+import { ProfileType } from '../../../../types/types';
 import Loader from '../../../preloader/loader';
 
 type OwnPropsType = {

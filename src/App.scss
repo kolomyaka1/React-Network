@@ -1,3 +1,7 @@
+* {
+  font-family: Roboto;
+}
+
 a {
   color: black;
   text-decoration: none;
@@ -32,19 +36,26 @@ button {
 
 .pagination {
   display: inline-block;
-  width: 300px;
-  margin: 0 auto;
+  margin: 15px 20px;
   & button {
     border: 1px solid black;
     padding: 8px 16px;
-    &:hover:not(.active) {
+    transition: background-color .3s;
+    &:hover:not(.pagination__active) {
       background-color:#fff;
+    }
+    &:first-child {
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+    &:last-child {
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
     }
   }
   &__active {
-    background-color: #4CAF50; 
+    background-color: #333; 
     color : white;
   }
-
 }
 

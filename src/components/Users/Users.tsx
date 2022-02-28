@@ -25,13 +25,15 @@ let Users = (props: OwnPropsType) => {
         }
     }
 
-    return <div>
-        <div className={s.page__wrapper}>
-            {pages.map(p => {
-                // @ts-ignore
-                return <span className={props.currentPage === p && s.selectedPage} onClick={(e) => { props.onPageChanged(p) }}>{p}</span>
-            })}
-        </div>
+    return (
+        <div>
+            <div className="news__block">
+            <div className='pagination'>
+                {pages.map(p => {
+                    // @ts-ignore
+                    return <button className={props.currentPage === p && 'pagination__active'} onClick={(e) => { props.onPageChanged(p) }}>{p}</button>
+                })}
+            </div>
         {
             props.users.map(u => <div key={u.id} className={s.users__wrapper}>
                 <div className={s.users__info}>
@@ -62,6 +64,8 @@ let Users = (props: OwnPropsType) => {
             </div>)
         }
     </div>
+    </div>
+    )
 }
 
 export default Users;

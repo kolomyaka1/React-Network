@@ -1,12 +1,4 @@
-import { GetItemsType, instance, ResponseType, ResultCodesEnum } from "./api";
-
-
-type FollowType = {
-    resultCode : ResultCodesEnum
-    messages : Array<string>
-}
-
-
+import { GetItemsType, instance, ResponseType } from "./api";
 
 
 export const usersAPI = {

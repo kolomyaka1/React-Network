@@ -1,5 +1,4 @@
 import React from "react";
-import { Navigate } from "react-router";
 import s from './NewsItem.module.scss'
 
 type PropsType = {
@@ -15,12 +14,9 @@ type PropsType = {
 }
 
 const NewsItem: React.FC<PropsType> = (props) => {
-
-
-    
     
     let data = props.publishedAt.slice(0,10);
-    
+    if (props.description) {
     return (
         <div className={s.news__item_wrapper}>
             <div className={s.news__item_block}>
@@ -38,7 +34,7 @@ const NewsItem: React.FC<PropsType> = (props) => {
                         
                         <div className={s.news__item_footer}>
                             <span>{props.source.name}</span>
-                            <span>{data}</span>
+                            <span className={s.news__item_footer_date}>{data}</span>
                         </div>
                     </div>
                 </div>
@@ -46,6 +42,11 @@ const NewsItem: React.FC<PropsType> = (props) => {
             </div>
         </div>
     )
+    } else {
+        return (
+            <div></div>
+        )
+    }
 }
 
 export default NewsItem;

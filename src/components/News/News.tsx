@@ -54,6 +54,7 @@ let News = (props: any) => {
                         urlToImage={item.urlToImage}
                         source={item.source}
                         totalResults={totalResults}
+                        key={item.url}
                         />
                     })
                 }

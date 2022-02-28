@@ -39,7 +39,6 @@ class UsersAPIComponent extends React.Component<OwnPropsType, AppStateType> {
             return <Navigate replace to='/Login' />
         }
         return <>
-        
             {this.props.isFetching ? <Loader /> :
                 <Users totalUsersCount={this.props.totalUsersCount}
                     pageSize={this.props.pageSize}

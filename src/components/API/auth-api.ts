@@ -1,4 +1,4 @@
-import { instance, ResponseType, ResultCodesEnum } from "./api";
+import { instance, ResponseType } from "./api";
 
 
 type LoginResponseType = {

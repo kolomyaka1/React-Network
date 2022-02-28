@@ -3,15 +3,18 @@ import { NavLink } from 'react-router-dom';
 import headerLogo from '../../img/headerLogo';
 import { DispatchPropsTypeForHeader, PropsTypeForHeader } from './HeaderContainer';
 import React from 'react';
-import { Navigate } from 'react-router'
+import { useDispatch } from 'react-redux';
+
 
 
 
 let Header: React.FC<PropsTypeForHeader & DispatchPropsTypeForHeader> = (props) => {
     
+    const dispatch = useDispatch();
+
     const logout = () => {
-        props.logout();
-        window.location.reload();
+        dispatch(props.logout())
+        // window.location.reload();
     }
 
     return (

@@ -55,7 +55,7 @@ export const getAuthUser = (): ThunkType => async (dispatch) => {
 
 export const getCaptcha = (): ThunkType => async (dispatch) => {
     let response = await authAPI.getCaptcha();
-dispatch(actions.setCaptcha(response.url))
+    dispatch(actions.setCaptcha(response.url))
 }
 
 
@@ -72,6 +72,8 @@ export const login = (email:string, password:string, captcha:string): ThunkType 
 
 export const logout = (): ThunkType =>  async (dispatch) => {
     let response = await authAPI.logout();
+    console.log(response);
+    
     if (response.data.resultCode === 0) {
         dispatch(actions.setAuthUserData(null,null,null,false))
     }
