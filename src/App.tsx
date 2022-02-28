@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import Nav from './components/Nav/Nav';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';

@@ -11,10 +11,11 @@ let News = (props: any) => {
     const dispatch = useDispatch();
 
     
-    const newsData1 = useSelector((state:AppStateType) => state.news.newsData);
+    const newsData = useSelector((state:AppStateType) => state.news.newsData);
     const totalResults = useSelector((state: AppStateType) => state.news.totalResults);
-    
-    let itemsCount = 10;
+    const currentPage = useSelector((state: AppStateType) => state.news.currentPage);
+
+    let itemsCount = 5;
     let pagesCount = Math.ceil(totalResults / itemsCount);
     
     let pages = [];
@@ -27,20 +28,18 @@ let News = (props: any) => {
     const onPageChanged = (p:number) => {
         dispatch(changePage(p))
     }
-    const pageNumber = 1;
-    const newsData = newsData1;
     
     useEffect(() => {
-        dispatch(getNews(1));
-    }, [])
+        dispatch(getNews(currentPage));
+    }, [currentPage])
 
     return (
         <div>
             <div className="news__block">
-            <div>
+            <div className='pagination'>
                 {pages.map(p => {
                     // @ts-ignore
-                    return <span className={props.currentPage === p && s.selectedPage} onClick={(e) => { onPageChanged(p) }}>{p}</span>
+                    return <button className={currentPage === p && 'pagination__active'} onClick={(e) => { onPageChanged(p) }}>{p}</button>
                 })}
             </div>
                 {

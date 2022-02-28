@@ -1,4 +1,4 @@
-import {Action, applyMiddleware, combineReducers, createStore} from 'redux';
+import {Action, applyMiddleware, combineReducers, compose, createStore} from 'redux';
 import authReducer from './auth-reducer';
 import dialogsReducer from './dialogs-reducer';
 import profileReducer from './profile-reducer';
@@ -25,7 +25,10 @@ export type AppStateType = ReturnType<ReducerType>
 export type InferActionTypes<T> = T extends { [keys: string]: (...args: any[]) => infer U} ? U : never
 export type BaseThunkType<A extends Action = Action,R = Promise<void>> = ThunkAction<R, AppStateType, unknown, A>
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+// @ts-ignore
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+let store = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
 
 // @ts-ignore
 window.__store__ = store
