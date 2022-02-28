@@ -9,7 +9,7 @@ let Friend = () => {
     const friendName = useSelector<AppStateType, Array<FriendNameType>>(state => state.sidebar.friendName)
 
     let FriendElement = friendName.map(el =>
-        <FriendItem name={el.name} />
+        <FriendItem name={el.name} key={el.name} />
     )
     
     return (

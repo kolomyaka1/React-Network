@@ -11,13 +11,12 @@ type PropsType = {
     url : string
     urlToImage : string
     source : any
-
+    totalResults : number
 }
 
 const NewsItem: React.FC<PropsType> = (props) => {
 
-    console.log(props);
-    console.log(props.url);
+
     
     
     let data = props.publishedAt.slice(0,10);
