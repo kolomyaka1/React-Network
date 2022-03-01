@@ -11,6 +11,7 @@ type OwnPropsTypeForComponent = {
     profile : ProfileType | null
     status : string | null
     match : any
+    userId : number | null
     getProfile : (userId : number) => void
     getUserStatus : (userId : number) => void
     updateUserStatus : (status : string) => void
@@ -21,7 +22,7 @@ class ProfileContainer extends React.Component<OwnPropsTypeForComponent, AppStat
     
     componentDidMount() {   
         
-        let userId = this.props.match ? this.props.match.params.userId : '21430';
+        let userId = this.props.match ? this.props.match.params.userId : '';
         this.props.getProfile(userId);
         this.props.getUserStatus(userId)
     }
@@ -36,11 +37,13 @@ class ProfileContainer extends React.Component<OwnPropsTypeForComponent, AppStat
 let mapStateToProps = (state: AppStateType) => ({
     profile : state.profilePage.profile,
     status : state.profilePage.status,
+    userId : state.auth.userId,
 })
 
 type OwnPropsType = {
     profile : ProfileType | null
     status : string | null
+    userId : number | null
     getProfile : (userId : number) => void
     getUserStatus : (userId : number) => void
     updateUserStatus : (status : string) => void

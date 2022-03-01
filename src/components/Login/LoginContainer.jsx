@@ -62,6 +62,7 @@ const SignupForm = (props) => {
                 onSubmit={values => {
                     
                     let { email, password, captcha } = values;
+                    console.log(email, password,captcha);
                     props.login(email, password, captcha);
                 }}
                 validationSchema={validationSchema}

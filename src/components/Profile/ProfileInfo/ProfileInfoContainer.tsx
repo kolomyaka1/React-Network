@@ -11,6 +11,7 @@ type OwnPropsType = {
     match : any
     profile : ProfileType | null
     status : string
+    userId : number
     getProfile : (userId: number) => void
     getUserStatus : (userId: number) => void
     updateUserStatus : (status : string) => void
@@ -20,9 +21,12 @@ type OwnPropsType = {
 class ProfileInfoContainer extends React.Component<OwnPropsType, AppStateType> {
 
     componentDidMount() {
-        let userId = this.props.match ? this.props.match.params.userId : '21430';
-        this.props.getProfile(userId);
-        this.props.getUserStatus(userId);
+        
+        // let userId = this.props.match ? this.props.match.params.userId : '21430';
+        if (this.props.userId) {
+            this.props.getProfile(this.props.userId);
+            this.props.getUserStatus(this.props.userId);
+        } 
 
     }
 
@@ -43,6 +47,7 @@ let mapStateToProps = (state: AppStateType) => ({
     profile : state.profilePage.profile,
     status : state.profilePage.status,
     isAuth : state.auth.isAuth,
+    userId : state.auth.userId
 })
 
 
