@@ -1,6 +1,6 @@
 import React from "react";
 import s from './NewsItem.module.scss'
-
+import noImage from '../../img/noImage.png'
 type PropsType = {
     author : string | null
     content : string
@@ -25,7 +25,12 @@ const NewsItem: React.FC<PropsType> = (props) => {
                 </div>
                 <div className={s.news__item_content}>
                     <div className={s.news__item_img}>
-                        <img src={props.urlToImage} alt="" />
+                        {
+                            props.urlToImage 
+                            ? <img src={props.urlToImage} alt="News-Photo" />
+                            : <img src={noImage} alt="" />
+                        }
+                        
                     </div>
                     <div className={s.news__item_text}>
                         <div className={s.news__item_description}>

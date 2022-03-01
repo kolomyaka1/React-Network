@@ -22,7 +22,7 @@ const authReducer = (state = initialState, action: ActionsTypes): InitialStateTy
             return {
                 ...state,  // Берем данные из state
                 ...action.data,  // В action создаем объект data, в который закидываем наши данные с сервера
-                isAuth: true,
+                isAuth: action.data.isAuth,
                 userId: action.data.userId,
             }
         case SET_CAPTCHA:
@@ -72,9 +72,9 @@ export const login = (email:string, password:string, captcha:string): ThunkType 
 
 export const logout = (): ThunkType =>  async (dispatch) => {
     let response = await authAPI.logout();
-    console.log(response);
     
-    if (response.data.resultCode === 0) {
+    
+    if (response.resultCode === 0) {
         dispatch(actions.setAuthUserData(null,null,null,false))
     }
 }

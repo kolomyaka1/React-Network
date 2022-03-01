@@ -4,7 +4,7 @@ import { NewsItemType, UserType } from '../../types/types';
 export const instance = axios.create({
     withCredentials: true,
     headers: {
-        'API-KEY': '8452f3f6-1c5f-4ee4-b81a-97b3e40f7066',
+        'API-KEY': '512f1d64-bb01-4102-8cd6-f2f8782ca6d1',
     },
     baseURL: `https://social-network.samuraijs.com/api/1.0/`,
 })

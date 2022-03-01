@@ -29,7 +29,8 @@ export const authAPI = {
         .then(response => response.data)
     },
     logout() {
-        return instance.delete<ResponseType<LogoutResponseType>>('auth/login');
+        return instance.delete<ResponseType<LogoutResponseType>>('auth/login')
+        .then(response => response.data)
     },
     getCaptcha() {
         return instance.get<GetCaptchaType>('security/get-captcha-url')
