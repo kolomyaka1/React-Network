@@ -35,8 +35,8 @@ let Users = (props: OwnPropsType) => {
                 })}
             </div>
         {
-            props.users.map(u => <div key={u.id} className={s.users__wrapper}>
-                <div className={s.users__info}>
+            props.users.map(u => <div className={s.users__wrapper}>
+                <div className={s.users__info} key={u.id}>
                     <div>
                         <NavLink to={'/Profile/' + u.id}>
                         <img src={u.photos.small != null ? u.photos.small : 

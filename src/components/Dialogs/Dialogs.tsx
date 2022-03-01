@@ -19,7 +19,7 @@ type OwnPropsType = {
 let Dialogs: React.FC<OwnPropsType> = (props) => {
     
     let DialogsElements = props.dialogsData.map(dialog =>
-        (<DialogItem name={dialog.name} id={dialog.id} />)
+        (<DialogItem key={dialog.id} name={dialog.name} id={dialog.id} />)
     )
 
     let MessagesElements = props.messageData.map(el =>

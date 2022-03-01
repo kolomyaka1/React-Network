@@ -2,6 +2,7 @@ import axios from 'axios';
 import { NewsItemType, UserType } from '../../types/types';
 
 export const instance = axios.create({
+    withCredentials: true,
     headers: {
         'API-KEY': '512f1d64-bb01-4102-8cd6-f2f8782ca6d1',
     },

@@ -3,10 +3,6 @@ import { NavLink } from 'react-router-dom';
 import headerLogo from '../../img/headerLogo';
 import { DispatchPropsTypeForHeader, PropsTypeForHeader } from './HeaderContainer';
 import React from 'react';
-import { useDispatch } from 'react-redux';
-
-
-
 
 let Header: React.FC<PropsTypeForHeader & DispatchPropsTypeForHeader> = (props) => {
     
