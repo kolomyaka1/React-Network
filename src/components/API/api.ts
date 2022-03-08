@@ -10,7 +10,6 @@ export const instance = axios.create({
 })
 
 export const newsItems = axios.create({
-    withCredentials : true,
     headers : {
         'API-KEY' : '1e41534e10f54fc69a549d79c3f15ed2', 
     },
