@@ -8,3 +8,12 @@
 - Formik (Реализация авторизации на сайте через отправку запроса на сервер)
 - Higher-Order Components (HOC)
 - classnames
+
+
+Веб-Приложение было выложено на Heroku, но получение новостей работает только с локального сервера. (Подписка на истоничке получения новостей платная)
+<!-- CORS enabled for localhost -->
+
+Логин : kolomyakan@mail.ru
+Пароль : qwerty
+
+https://react-social--network.herokuapp.com/Login
