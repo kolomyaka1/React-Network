@@ -19,6 +19,7 @@
 
 .login__password {
     margin-bottom: 20px;
+    margin-top: 15px;
 }
 
 
@@ -42,7 +43,9 @@
     line-height: 18px;
     cursor: pointer;
     padding: 5px 15px;
+    width: 100px;
     transition: all 300ms ease-in-out;
+    margin: 0 auto;
 }
 
 .login__button1:hover {
@@ -69,4 +72,9 @@
     width: 125px;
     display: flex;
     align-items: center;
+}
+
+.login__form {
+    display: flex;
+    flex-direction: column;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import s from './NewsItem.module.scss'
 import noImage from '../../img/noImage.png'
+
 type PropsType = {
     author : string | null
     content : string

@@ -14,8 +14,6 @@ type OwnPropsType = {
 }
 
 
-
-
 let Dialogs: React.FC<OwnPropsType> = (props) => {
     
     let DialogsElements = props.dialogsData.map(dialog =>
@@ -68,7 +66,7 @@ let Dialogs: React.FC<OwnPropsType> = (props) => {
                     ref={ newDialogElement }
                     value={props.newMessageText}
                     />
-                    <button onClick={ addMessage }>Send</button>
+                    <button onClick={ addMessage } className='button1'>Send</button>
                 </div>
 
 

@@ -78,10 +78,10 @@ const SignupForm = (props) => {
                         <div className={s.login__email}>
                             <MyTextInput
                                 className
-                                label="Email Address"
+                                label="Email"
                                 name="email"
                                 type="email"
-                                placeholder="user@react-network.com"
+                                placeholder="kolomyakan@mail.ru"
                             />
                         </div>
 
@@ -92,19 +92,6 @@ const SignupForm = (props) => {
                                 type='password'
                             />
                         </div>
-                        {/* <img src={props.captcha}></img><br />
-                        <MyCaptcha
-                            name="captcha"
-                            label='captcha'
-                        /> */}
-
-                        
-                        {/* <div className={s.login__captcha}>
-                                <img src={props.captcha} alt="captcha" />
-                                <input type="text" name='captcha' placeholder='Текст с картинки'/>
-                                
-                        </div> */}
-
 
                         {props.captcha
                             ? <div className={s.login__captcha}>
@@ -112,8 +99,9 @@ const SignupForm = (props) => {
                                 <MyCaptcha name="captcha" label='captcha' />                            </div>
                             : ''
                         }
-                        <button type="submit">Отправить</button>
+                        <button type="submit" className={s.login__button1}>Отправить</button>
                     </Form>
+                    
                 )}
             </Formik>
         </div>
