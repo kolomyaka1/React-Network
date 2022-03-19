@@ -44,7 +44,7 @@ let News = (props: any) => {
                     <div className='pagination'>
                         {pages.map(p => {
                             // @ts-ignore
-                            return <button className={currentPage === p && 'pagination__active'} onClick={(e) => { onPageChanged(p) }}>{p}</button>
+                            return <button key={p} className={currentPage === p && 'pagination__active'} onClick={(e) => { onPageChanged(p) }}>{p}</button>
                         })}
                     </div>
                     <div className={s.news__block_country}>

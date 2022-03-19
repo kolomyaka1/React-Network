@@ -21,7 +21,7 @@ let Dialogs: React.FC<OwnPropsType> = (props) => {
     )
 
     let MessagesElements = props.messageData.map(el =>
-        (<Message message={el.message} />)
+        (<Message key={el.id} message={el.message} />)
     )
 
     let newDialogElement = React.createRef<HTMLTextAreaElement>();

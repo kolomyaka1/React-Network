@@ -31,11 +31,11 @@ let Users = (props: OwnPropsType) => {
             <div className='pagination'>
                 {pages.map(p => {
                     // @ts-ignore
-                    return <button className={props.currentPage === p && 'pagination__active'} onClick={(e) => { props.onPageChanged(p) }}>{p}</button>
+                    return <button key={p} className={props.currentPage === p && 'pagination__active'} onClick={(e) => { props.onPageChanged(p) }}>{p}</button>
                 })}
             </div>
         {
-            props.users.map(u => <div className={s.users__wrapper}>
+            props.users.map(u => <div key={u.id} className={s.users__wrapper}>
                 <div className={s.users__info} key={u.id}>
                     <div>
                         <NavLink to={'/Profile/' + u.id}>
